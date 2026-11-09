@@ -1,0 +1,2755 @@
+/* =========================================================
+   ÁLBUM DE CUMPLEAÑOS · edición Borahae 💜 — style.css
+
+   Índice
+   1.  Variables (colores, fuentes, sombras)  ← cambia la paleta aquí
+   2.  Base
+   3.  Botones y utilidades
+   4.  Animaciones de aparición al hacer scroll
+   5.  Fondo: brillos, corazones y confeti
+   6.  Pantalla de bienvenida
+   7.  Menú flotante (dock)
+   8.  Hero / Portada + contador
+   9.  Encabezados de sección
+   10. Álbum de fotos (polaroids)
+   11. Línea de tiempo
+   12. Sección Borahae: tarjeta morada + tocadiscos
+   13. Minijuego: Memoria Borahae
+   14. Ventana de victoria
+   15. Sobre y carta de amor
+   16. Footer
+   17. Lightbox (foto en pantalla completa)
+   18. Botón de música
+   19. Responsive (tablet y computadora)
+   20. Accesibilidad: menos movimiento
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. VARIABLES
+   ✏️ Cambia aquí los colores si quieres otra paleta
+   --------------------------------------------------------- */
+:root {
+  /* Rosa pastel */
+  --rosa-50:  #fff7fa;
+  --rosa-100: #fdebf2;
+  --rosa-200: #fad6e4;
+  --rosa-300: #f5bad0;
+  --rosa-400: #ec9bbb;
+  --rosa-500: #d9779f;
+
+  /* Lila / lavanda (el morado de BTS 💜) */
+  --lila-50:  #f9f6ff;
+  --lila-100: #f0eaff;
+  --lila-200: #e0d4fb;
+  --lila-300: #c9b6f2;
+  --lila-400: #ab92e4;
+  --lila-500: #8d70d0;
+  --morado:        #6e52b5;
+  --morado-oscuro: #3d2a6b;
+
+  /* Dorado */
+  --dorado:        #c9a45c;
+  --dorado-claro:  #ecd9a9;
+  --dorado-oscuro: #9c7a36;
+
+  /* Neutros */
+  --perla:       #fffafd;
+  --blanco:      #ffffff;
+  --tinta:       #45325f;   /* títulos */
+  --texto:       #5a4b68;
+  --texto-suave: #857898;
+
+  /* Degradados de marca */
+  --degradado:       linear-gradient(135deg, var(--rosa-400), var(--lila-500));
+  --degradado-suave: linear-gradient(135deg, var(--rosa-100), var(--lila-100));
+  --degradado-boton: linear-gradient(120deg, #c2629a, #8064c8 50%, #c2629a);
+
+  /* Tipografías */
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:  'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Formas y sombras */
+  --radio: 20px;
+  --sombra-sm: 0 10px 24px -14px rgba(110, 82, 181, .40);
+  --sombra-md: 0 24px 48px -20px rgba(110, 82, 181, .48);
+  --sombra-lg: 0 40px 80px -30px rgba(61, 42, 107, .55);
+
+  /* Curvas de animación */
+  --ease:      cubic-bezier(.2, .7, .2, 1);
+  --ease-back: cubic-bezier(.34, 1.56, .64, 1);
+
+  /* Espacio seguro (iPhone con notch / barra inferior) */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+
+/* ---------------------------------------------------------
+   2. BASE
+   --------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--texto);
+  background: var(--perla);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo fijo con manchas de color rosa y lavanda */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(55vmax 55vmax at 0% 0%, var(--rosa-100), transparent 60%),
+    radial-gradient(50vmax 50vmax at 100% 30%, var(--lila-100), transparent 60%),
+    radial-gradient(55vmax 55vmax at 10% 100%, #f6eefe, transparent 60%),
+    radial-gradient(40vmax 40vmax at 90% 95%, var(--rosa-100), transparent 60%),
+    var(--perla);
+}
+
+/* Bloquea el scroll (bienvenida, lightbox y ventana del juego abiertos) */
+body.is-locked {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--tinta);
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: inherit;
+}
+
+strong {
+  font-weight: 500;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--lila-500);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* El contenido va por encima del fondo animado */
+.hero,
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+
+/* ---------------------------------------------------------
+   3. BOTONES Y UTILIDADES
+   --------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  min-height: 48px;
+  padding: .85rem 1.9rem;
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: .95rem;
+  letter-spacing: .03em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), background-position .6s var(--ease), background-color .3s;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+/* Botón blanco (bienvenida) */
+.btn--light {
+  background: var(--blanco);
+  color: var(--morado);
+  box-shadow: 0 14px 34px rgba(30, 14, 60, .3);
+}
+
+/* Botón con degradado rosa → lavanda */
+.btn--glow {
+  color: var(--blanco);
+  background: var(--degradado-boton);
+  background-size: 200% 100%;
+  box-shadow: 0 14px 30px -12px rgba(128, 100, 200, .75), inset 0 1px 0 rgba(255, 255, 255, .3);
+}
+
+/* Botón transparente con borde */
+.btn--ghost {
+  color: var(--morado);
+  background: rgba(255, 255, 255, .7);
+  box-shadow: inset 0 0 0 1.5px var(--lila-300);
+}
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  15%      { transform: scale(1.16); }
+  30%      { transform: scale(1); }
+  45%      { transform: scale(1.08); }
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .45; }
+}
+
+@keyframes pop {
+  0%   { transform: scale(.4); opacity: 0; }
+  60%  { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+
+/* ---------------------------------------------------------
+   4. ANIMACIONES DE APARICIÓN AL HACER SCROLL
+   script.js añade .is-visible cuando el elemento entra en
+   pantalla. --d es un retraso opcional (ej. style="--d:.3s").
+   --------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  animation: aparecer 1s var(--ease) var(--d, 0s) backwards;
+}
+
+.reveal--zoom.is-visible {
+  animation-name: aparecerZoom;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(34px); }
+}
+
+@keyframes aparecerZoom {
+  from { opacity: 0; transform: scale(.82); }
+}
+
+@keyframes aparecerIzq {
+  from { opacity: 0; transform: translateX(-46px); }
+}
+
+@keyframes aparecerDer {
+  from { opacity: 0; transform: translateX(46px); }
+}
+
+
+/* ---------------------------------------------------------
+   5. FONDO: BRILLOS, CORAZONES Y CONFETI
+   --------------------------------------------------------- */
+
+/* Brillitos dorados y lilas que titilan */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sky::before,
+.sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  animation: titilar 4.5s ease-in-out infinite alternate;
+}
+
+.sky::before {
+  background-image:
+    radial-gradient(2px 2px at 12% 18%, var(--dorado) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 78% 12%, var(--dorado) 50%, transparent 51%),
+    radial-gradient(2px 2px at 88% 58%, var(--dorado) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 32% 72%, var(--dorado) 50%, transparent 51%),
+    radial-gradient(2px 2px at 58% 38%, var(--dorado) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 6% 88%, var(--dorado) 50%, transparent 51%);
+  opacity: .55;
+}
+
+.sky::after {
+  background-image:
+    radial-gradient(2px 2px at 24% 44%, var(--lila-400) 50%, transparent 51%),
+    radial-gradient(2.5px 2.5px at 66% 82%, var(--lila-400) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 44% 8%, var(--lila-400) 50%, transparent 51%),
+    radial-gradient(2px 2px at 94% 28%, var(--rosa-400) 50%, transparent 51%),
+    radial-gradient(2px 2px at 16% 62%, var(--rosa-400) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 72% 52%, var(--lila-400) 50%, transparent 51%);
+  animation-delay: -2.2s;
+}
+
+@keyframes titilar {
+  from { opacity: .15; }
+  to   { opacity: .75; }
+}
+
+/* Corazones que suben */
+.hearts {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -3rem;
+  left: var(--x);
+  font-size: var(--s);
+  line-height: 1;
+  color: var(--c);
+  opacity: 0;
+  animation: subir var(--dur) linear forwards;
+}
+
+@keyframes subir {
+  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--o); }
+  85%  { opacity: var(--o); }
+  100% { transform: translate(var(--drift), -110vh) rotate(var(--rot)); opacity: 0; }
+}
+
+/* Confeti */
+.confetti {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti i {
+  position: absolute;
+  top: -2rem;
+  left: var(--x);
+  width: var(--w);
+  height: calc(var(--w) * .45);
+  background: var(--c);
+  border-radius: 2px;
+  animation: caer var(--dur) cubic-bezier(.3, .5, .6, 1) var(--delay) forwards;
+}
+
+.confetti i.is-heart {
+  width: auto;
+  height: auto;
+  background: none;
+  color: var(--c);
+  font-size: calc(var(--w) * 2.2);
+  font-style: normal;
+  line-height: 1;
+}
+
+@keyframes caer {
+  to { transform: translate(var(--drift), 112vh) rotate(var(--rot)); }
+}
+
+/* Mini estallido de corazones al encontrar una pareja en el juego */
+.burst {
+  position: fixed;
+  left: var(--x);
+  top: var(--y);
+  z-index: 960;
+  margin: -.5em 0 0 -.5em;
+  font-size: var(--s);
+  font-style: normal;
+  line-height: 1;
+  color: var(--c);
+  pointer-events: none;
+  animation: estallido .9s var(--ease) forwards;
+}
+
+@keyframes estallido {
+  from { transform: translate(0, 0) scale(.3); opacity: 1; }
+  to   { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0; }
+}
+
+
+/* ---------------------------------------------------------
+   6. PANTALLA DE BIENVENIDA
+   --------------------------------------------------------- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: var(--blanco);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255, 214, 232, .42), transparent 55%),
+    radial-gradient(circle at 85% 95%, rgba(201, 182, 242, .55), transparent 50%),
+    radial-gradient(circle at 5% 80%, rgba(236, 155, 187, .35), transparent 45%),
+    linear-gradient(160deg, #2f2056, var(--morado) 48%, #c06c9e);
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+/* Estrellitas en la bienvenida */
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 14% 22%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 82% 16%, #fff 50%, transparent 51%),
+    radial-gradient(2px 2px at 70% 74%, var(--dorado-claro) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 24% 84%, #fff 50%, transparent 51%),
+    radial-gradient(2px 2px at 90% 46%, var(--dorado-claro) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 40% 10%, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 8% 54%, var(--dorado-claro) 50%, transparent 51%);
+  animation: titilar 3s ease-in-out infinite alternate;
+}
+
+.intro.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro__content {
+  position: relative;
+}
+
+.intro__heart {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 1.4rem;
+  display: grid;
+  place-items: center;
+}
+
+.intro__heart svg {
+  width: 74px;
+  filter: drop-shadow(0 0 22px rgba(255, 200, 225, .75));
+  animation: latido 1.6s ease-in-out infinite;
+}
+
+/* Aro punteado que gira con un brillo */
+.intro__orbit {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px dashed rgba(236, 217, 169, .6);
+  animation: girar 14s linear infinite;
+}
+
+.intro__orbit::before {
+  content: "✦";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--dorado-claro);
+  transform: translateX(-50%);
+}
+
+.intro__small {
+  margin-bottom: .2rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  color: #ffe1ee;
+}
+
+.intro__title {
+  margin-bottom: .8rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 7.5vw, 2.8rem);
+  line-height: 1.25;
+}
+
+.intro__hint {
+  margin-bottom: 2rem;
+  font-size: .8rem;
+  letter-spacing: .12em;
+  opacity: .8;
+}
+
+.intro__kr {
+  margin: 2.2rem 0 0;
+  font-size: .72rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dorado-claro);
+  opacity: .85;
+}
+
+
+/* ---------------------------------------------------------
+   7. MENÚ FLOTANTE (DOCK)
+   --------------------------------------------------------- */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(.85rem + var(--safe-bottom));
+  z-index: 700;
+  display: flex;
+  gap: .12rem;
+  padding: .32rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .8);
+  border: 1px solid rgba(201, 182, 242, .55);
+  box-shadow: var(--sombra-md);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  opacity: 0;
+  transform: translate(-50%, 150%);
+  transition: transform .8s var(--ease-back) .4s, opacity .5s ease .4s;
+}
+
+body.is-ready .dock {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.dock__link {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--texto-suave);
+  -webkit-tap-highlight-color: transparent;
+  transition: color .3s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.dock__link svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dock__link.is-active {
+  color: var(--blanco);
+  background: var(--degradado);
+  box-shadow: 0 8px 16px -8px rgba(141, 112, 208, .9);
+}
+
+/* Etiqueta que aparece al pasar el mouse */
+.dock__link::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  padding: .25rem .65rem;
+  border-radius: 8px;
+  font-size: .7rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--blanco);
+  background: var(--tinta);
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+
+/* ---------------------------------------------------------
+   8. HERO / PORTADA + CONTADOR
+   --------------------------------------------------------- */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.25rem 9rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero__content {
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Foto redonda con aro de colores */
+.hero__photo {
+  position: relative;
+  width: clamp(140px, 40vw, 200px);
+  aspect-ratio: 1;
+  margin: 0 auto 1.9rem;
+  padding: 5px;
+  border-radius: 50%;
+  background: conic-gradient(from 20deg, var(--dorado-claro), var(--rosa-400), var(--lila-400), var(--dorado), var(--dorado-claro));
+  box-shadow: 0 24px 50px -16px rgba(110, 82, 181, .6);
+}
+
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--perla);
+}
+
+/* Onda suave que late alrededor */
+.hero__photo::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(171, 146, 228, .6);
+  animation: pulso 3s ease-out infinite;
+}
+
+@keyframes pulso {
+  0%   { transform: scale(.96); opacity: 1; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+
+/* Aro punteado que gira con una estrellita */
+.hero__ring {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px dashed rgba(201, 164, 92, .55);
+  animation: girar 30s linear infinite;
+}
+
+.hero__ring::before {
+  content: "✦";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--dorado);
+  transform: translateX(-50%);
+}
+
+.hero__badge {
+  position: absolute;
+  right: 0;
+  bottom: 6%;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  background: var(--blanco);
+  box-shadow: var(--sombra-sm);
+  animation: latido 2.2s ease-in-out infinite;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: .6rem;
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--dorado-oscuro);
+}
+
+.hero__title {
+  font-size: clamp(2.2rem, 8vw, 4.2rem);
+  font-weight: 600;
+}
+
+/* Nombre con degradado rosa → lavanda → dorado que brilla */
+.hero__name {
+  display: block;
+  width: fit-content;
+  margin: .1em auto 0;
+  padding: 0 .2em .12em;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3.4rem, 15vw, 7rem);
+  line-height: 1.1;
+  background: linear-gradient(110deg, var(--rosa-500), var(--lila-500) 35%, var(--dorado) 55%, var(--rosa-500) 75%, var(--lila-500));
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: brilloNombre 9s linear infinite;
+}
+
+@keyframes brilloNombre {
+  to { background-position: -250% 0; }
+}
+
+.hero__subtitle {
+  max-width: 520px;
+  margin: 1rem auto 2.4rem;
+  font-size: clamp(.98rem, 2.8vw, 1.1rem);
+  color: var(--texto-suave);
+}
+
+.counter__label {
+  margin-bottom: .9rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--morado);
+}
+
+.counter__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .6rem;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.counter__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .95rem .3rem .75rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(201, 182, 242, .5);
+  box-shadow: var(--sombra-sm);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* Línea de brillo arriba de cada cajita */
+.counter__box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--degradado);
+  opacity: .7;
+}
+
+.counter__num {
+  display: inline-block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.55rem, 6vw, 2.2rem);
+  line-height: 1.1;
+  color: var(--morado);
+  font-variant-numeric: tabular-nums;
+}
+
+.counter__num.is-tick {
+  animation: tick .45s var(--ease);
+}
+
+@keyframes tick {
+  from { transform: translateY(-6px); opacity: .3; }
+}
+
+.counter__unit {
+  margin-top: .25rem;
+  font-size: .64rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.counter__total {
+  margin: 1.3rem 0 0;
+  font-size: .95rem;
+}
+
+.counter__total strong {
+  font-weight: 600;
+  color: var(--morado);
+}
+
+/* Indicador de "desliza hacia abajo" (por encima del menú flotante) */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(5.4rem + var(--safe-bottom));
+  width: 26px;
+  height: 42px;
+  margin-left: -13px;
+  border: 2px solid var(--lila-400);
+  border-radius: 20px;
+  opacity: .8;
+}
+
+.scroll-cue span {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 4px;
+  background: var(--lila-500);
+  animation: rueda 1.8s ease-in-out infinite;
+}
+
+@keyframes rueda {
+  0%   { transform: translateY(0); opacity: 1; }
+  70%  { transform: translateY(14px); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+
+/* ---------------------------------------------------------
+   9. ENCABEZADOS DE SECCIÓN
+   --------------------------------------------------------- */
+.section {
+  position: relative;
+  padding: clamp(4.5rem, 11vw, 7.5rem) 1.25rem;
+}
+
+/* Franja rosada */
+.section--rosa {
+  background: linear-gradient(180deg, transparent, rgba(253, 235, 242, .8) 12%, rgba(253, 235, 242, .8) 88%, transparent);
+}
+
+/* Franja lavanda */
+.section--lila {
+  background: linear-gradient(180deg, transparent, rgba(240, 234, 255, .9) 12%, rgba(240, 234, 255, .9) 88%, transparent);
+}
+
+.section__header {
+  max-width: 640px;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+}
+
+.section__title {
+  font-size: clamp(2.1rem, 7vw, 3.2rem);
+}
+
+.section__kr {
+  display: block;
+  margin-top: .45rem;
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--lila-500);
+}
+
+.section__text {
+  margin: 1rem 0 0;
+  font-size: .96rem;
+  color: var(--texto-suave);
+}
+
+.section__text strong {
+  font-weight: 600;
+  color: var(--morado);
+}
+
+/* Separador ——— ♥ ——— */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+  margin-top: 1rem;
+  color: var(--dorado);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dorado));
+}
+
+.divider::after {
+  transform: scaleX(-1);
+}
+
+
+/* ---------------------------------------------------------
+   10. ÁLBUM DE FOTOS (polaroids con cinta washi)
+   --------------------------------------------------------- */
+.gallery {
+  column-count: 2;
+  column-gap: .9rem;
+  padding-top: 12px;
+}
+
+.gallery__item {
+  --rot: -1.6deg;
+  position: relative;
+  margin: 0 0 1.4rem;
+  padding: .45rem .45rem 0;
+  border-radius: 6px;
+  background: var(--blanco);
+  box-shadow: var(--sombra-sm);
+  transform: rotate(var(--rot));
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .55s var(--ease), box-shadow .55s var(--ease);
+}
+
+.gallery__item:nth-child(3n + 2) { --rot: 1.4deg; }
+.gallery__item:nth-child(3n)     { --rot: -.6deg; }
+
+/* Cinta washi arriba de cada foto */
+.gallery__item::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  z-index: 2;
+  width: 76px;
+  height: 22px;
+  border-radius: 2px;
+  background-color: rgba(201, 182, 242, .62);
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, .3) 0 4px, transparent 4px 8px);
+  box-shadow: 0 2px 5px rgba(61, 42, 107, .08);
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+.gallery__item:nth-child(even)::before {
+  background-color: rgba(245, 186, 208, .7);
+  transform: translateX(-50%) rotate(3deg);
+}
+
+.gallery__frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  isolation: isolate;
+  background: var(--rosa-100);
+}
+
+.gallery__frame img {
+  width: 100%;
+  height: auto;
+  transition: transform 1s var(--ease);
+}
+
+/* Velo de color + corazón al pasar el mouse */
+.gallery__frame::after {
+  content: "♥";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2.2rem;
+  color: var(--blanco);
+  background: linear-gradient(160deg, rgba(236, 155, 187, .45), rgba(141, 112, 208, .5));
+  opacity: 0;
+  transition: opacity .45s var(--ease);
+}
+
+.gallery__item figcaption {
+  padding: .55rem .35rem .7rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: .82rem;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--tinta);
+}
+
+.gallery__item:active {
+  transform: rotate(0deg) scale(.98);
+}
+
+@media (hover: hover) {
+  .gallery__item:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.02);
+    box-shadow: var(--sombra-md);
+  }
+
+  .gallery__item:hover .gallery__frame img {
+    transform: scale(1.08);
+  }
+
+  .gallery__item:hover .gallery__frame::after {
+    opacity: 1;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   11. LÍNEA DE TIEMPO
+   (celular: línea a la izquierda · PC: línea al centro)
+   script.js llena la línea (--progreso) y enciende cada
+   momento (.is-active) a medida que bajas.
+   --------------------------------------------------------- */
+.timeline {
+  --progreso: 0;
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.timeline__track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 3px;
+  margin-left: -1.5px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba(201, 182, 242, .35);
+}
+
+.timeline__fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(var(--dorado-claro), var(--rosa-400) 45%, var(--lila-500));
+  transform-origin: top;
+  transform: scaleY(var(--progreso));
+}
+
+.timeline__item {
+  position: relative;
+  padding-left: 58px;
+  margin-bottom: 2rem;
+}
+
+.timeline__item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline__dot {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  line-height: 1;
+  border-radius: 50%;
+  background: var(--blanco);
+  border: 2px solid var(--lila-200);
+  box-shadow: 0 0 0 6px rgba(255, 250, 253, .9), var(--sombra-sm);
+  transform: translateX(-50%);
+  transition: border-color .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease-back);
+}
+
+.timeline__item.is-active .timeline__dot {
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 6px rgba(255, 250, 253, .9), 0 0 0 9px rgba(201, 182, 242, .45), 0 10px 24px -8px rgba(141, 112, 208, .8);
+  transform: translateX(-50%) scale(1.12);
+}
+
+.timeline__card {
+  padding: 1.4rem 1.4rem 1.2rem;
+  border-radius: var(--radio);
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(201, 182, 242, .35);
+  box-shadow: var(--sombra-sm);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease), border-color .5s ease;
+}
+
+.timeline__item.is-active .timeline__card {
+  border-color: rgba(171, 146, 228, .6);
+}
+
+.timeline__card p {
+  margin: 0;
+  font-size: .95rem;
+}
+
+.timeline__date {
+  display: inline-block;
+  margin-bottom: .6rem;
+  padding: .28rem .85rem;
+  border-radius: 999px;
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--morado);
+  background: var(--degradado-suave);
+}
+
+.timeline__title {
+  margin-bottom: .45rem;
+  font-size: 1.3rem;
+}
+
+.timeline__img {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 12px;
+  object-fit: cover;
+  aspect-ratio: 16 / 10;
+}
+
+@media (hover: hover) {
+  .timeline__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-md);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   12. SECCIÓN BORAHAE: TARJETA MORADA + TOCADISCOS
+   --------------------------------------------------------- */
+.borahae {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* --- Tarjeta "I purple you" --- */
+.purple-card {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1.5rem 1.8rem;
+  border-radius: 28px;
+  color: #f1eaff;
+  background:
+    radial-gradient(circle at 90% 110%, rgba(236, 155, 187, .55), transparent 55%),
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, .14), transparent 45%),
+    linear-gradient(155deg, #34245e, #523b97 55%, #7a58b8);
+  box-shadow: var(--sombra-lg);
+}
+
+/* Brillo diagonal suave */
+.purple-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .07) 50%, transparent 60%);
+  pointer-events: none;
+}
+
+.purple-card h3 {
+  margin-bottom: .8rem;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 6.5vw, 2.4rem);
+  color: var(--blanco);
+}
+
+.purple-card p {
+  font-size: .96rem;
+  color: rgba(241, 234, 255, .92);
+}
+
+.purple-card em {
+  font-family: var(--serif);
+}
+
+.purple-card strong {
+  color: var(--blanco);
+}
+
+.purple-card__love {
+  margin: 1.3rem 0 .6rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem !important;
+  line-height: 1.7;
+  color: var(--blanco) !important;
+}
+
+.purple-card__sign {
+  display: block;
+  text-align: right;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--dorado-claro);
+}
+
+/* Constelación: 7 estrellas + un corazón en el centro */
+.constellation svg {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto .4rem;
+  overflow: visible;
+}
+
+.constellation__line {
+  fill: none;
+  stroke: rgba(236, 217, 169, .5);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 2.8s var(--ease) .4s;
+}
+
+.purple-card.is-visible .constellation__line {
+  stroke-dashoffset: 0;
+}
+
+.constellation__star {
+  fill: var(--dorado-claro);
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 4px rgba(236, 217, 169, .9));
+  animation: estrellaTitila 2.8s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes estrellaTitila {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .45; transform: scale(.7); }
+}
+
+.constellation__heart {
+  fill: var(--rosa-300);
+  filter: drop-shadow(0 0 6px rgba(245, 186, 208, .9));
+}
+
+.constellation__names {
+  margin: 0 0 1.4rem !important;
+  font-size: .62rem !important;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-wrap: balance;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(236, 217, 169, .9) !important;
+}
+
+/* --- Tocadiscos --- */
+.player {
+  padding: 1.6rem 1rem 1.1rem;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid rgba(201, 182, 242, .5);
+  box-shadow: var(--sombra-md);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.player__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player__deck {
+  position: relative;
+  display: block;
+  width: min(210px, 58vw);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+/* Reflejo de luz sobre el disco (queda quieto mientras el disco gira) */
+.player__deck::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, transparent 0 8%, rgba(255, 255, 255, .16) 14%, transparent 20% 58%, rgba(255, 255, 255, .1) 64%, transparent 70%);
+  pointer-events: none;
+}
+
+.player__deck.is-nudge {
+  animation: sacudirDisco .5s ease;
+}
+
+@keyframes sacudirDisco {
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+
+.vinyl {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 0 30%, rgba(255, 255, 255, .05) 30.5% 31%, transparent 31.5%),
+    repeating-radial-gradient(circle, #241a3a 0 1.5px, #30244b 1.5px 3px);
+  box-shadow: 0 18px 36px -14px rgba(61, 42, 107, .75), inset 0 0 0 5px #1b1330;
+  animation: girar 3.6s linear infinite;
+  animation-play-state: paused;
+}
+
+.player.is-playing .vinyl {
+  animation-play-state: running;
+}
+
+.vinyl__label {
+  position: absolute;
+  inset: 31%;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid var(--lila-300);
+  background: var(--rosa-200);
+}
+
+.vinyl__label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Agujero del centro */
+.vinyl__label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--perla);
+  box-shadow: 0 0 0 2px rgba(61, 42, 107, .45);
+}
+
+/* Brazo del tocadiscos: se apoya sobre el disco al sonar */
+.tonearm {
+  position: absolute;
+  top: -8%;
+  right: -16%;
+  width: 34%;
+  height: 68%;
+  overflow: visible;
+  pointer-events: none;
+  transform-origin: 76.7% 10%;
+  transform: rotate(-22deg);
+  transition: transform .9s var(--ease);
+}
+
+.player.is-playing .tonearm {
+  transform: rotate(9deg);
+}
+
+.tonearm__base { fill: var(--dorado-claro); stroke: var(--dorado); stroke-width: 1.5; }
+.tonearm__pin  { fill: var(--dorado); }
+.tonearm__arm  { fill: none; stroke: var(--dorado); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.tonearm__head { fill: var(--tinta); }
+
+.player__now {
+  margin: 1.2rem 0 .4rem;
+  text-align: center;
+}
+
+.player__label {
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--dorado-oscuro);
+}
+
+.player__title {
+  margin: .1rem 0 .35rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+/* Ecualizador */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.eq i {
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(var(--rosa-400), var(--lila-500));
+  transform-origin: bottom;
+  animation: eq 1s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.eq i:nth-child(2) { animation-delay: -.3s; }
+.eq i:nth-child(3) { animation-delay: -.6s; }
+.eq i:nth-child(4) { animation-delay: -.15s; }
+.eq i:nth-child(5) { animation-delay: -.45s; }
+
+.player.is-playing .eq i {
+  animation-play-state: running;
+}
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(.25); }
+  50%      { transform: scaleY(1); }
+}
+
+.player__heading {
+  margin: 1.4rem 0 .7rem;
+  padding: 0 .4rem;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+/* Lista de canciones */
+.playlist {
+  display: grid;
+  gap: .3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .8rem;
+  padding: .75rem .7rem;
+  border-radius: 16px;
+  transition: background .3s ease;
+}
+
+.track__num {
+  width: 1.6rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--lila-400);
+}
+
+.track__info p {
+  margin: 0;
+}
+
+.track__title {
+  font-weight: 500;
+  font-size: .95rem;
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+.track__meta {
+  font-size: .66rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.track__why {
+  margin-top: .3rem !important;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--texto);
+}
+
+.track__actions {
+  display: flex;
+}
+
+.track__btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--blanco);
+  background: var(--degradado);
+  box-shadow: 0 8px 18px -10px rgba(141, 112, 208, .9);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .3s var(--ease-back), box-shadow .3s ease;
+}
+
+.track__btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.track__btn--link {
+  color: var(--morado);
+  background: var(--blanco);
+  box-shadow: inset 0 0 0 1.5px var(--lila-200);
+}
+
+.track__btn .i-pause,
+.track.is-playing .track__btn .i-play {
+  display: none;
+}
+
+.track.is-playing .track__btn .i-pause {
+  display: block;
+}
+
+.track.is-current {
+  background: linear-gradient(90deg, var(--lila-100), var(--rosa-50));
+}
+
+.track.is-current .track__num {
+  color: var(--rosa-500);
+}
+
+.player__note {
+  margin: .9rem 0 0;
+  font-size: .75rem;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+@media (hover: hover) {
+  .track:hover {
+    background: var(--lila-50);
+  }
+
+  .track.is-current:hover {
+    background: linear-gradient(90deg, var(--lila-100), var(--rosa-50));
+  }
+
+  .track__btn:hover {
+    transform: scale(1.1);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   13. MINIJUEGO: MEMORIA BORAHAE
+   --------------------------------------------------------- */
+.game {
+  display: grid;
+  grid-template-areas:
+    "stats"
+    "board"
+    "fact"
+    "found"
+    "actions";
+  gap: 1.1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.game__stats {
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .45rem;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: .6rem .15rem .5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(201, 182, 242, .45);
+  box-shadow: var(--sombra-sm);
+}
+
+.stat__num {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--morado);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__label {
+  font-size: .56rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+/* Tablero */
+.game__board {
+  grid-area: board;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(.45rem, 2vw, .75rem);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: clamp(.6rem, 2.6vw, 1rem);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .78), rgba(240, 234, 255, .78));
+  border: 1px solid rgba(201, 182, 242, .5);
+  box-shadow: var(--sombra-md);
+}
+
+/* Carta (con giro 3D) */
+.card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  cursor: pointer;
+  perspective: 800px;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .3s var(--ease);
+}
+
+/* Las cartas se "reparten" cuando el juego aparece en pantalla */
+.game.is-visible .card {
+  animation: repartir .55s var(--ease-back) backwards;
+  animation-delay: calc(var(--i, 0) * 35ms + .2s);
+}
+
+@keyframes repartir {
+  from { opacity: 0; transform: translateY(18px) scale(.8); }
+}
+
+.card__inner {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform .6s var(--ease);
+}
+
+.card.is-flipped .card__inner {
+  transform: rotateY(180deg);
+}
+
+.card__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: inherit;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reverso: lavanda → rosa con puntitos y marco dorado */
+.card__back {
+  background:
+    radial-gradient(circle at 30% 18%, rgba(255, 255, 255, .4), transparent 42%),
+    linear-gradient(145deg, var(--lila-400), var(--rosa-400));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .5), 0 8px 16px -10px rgba(110, 82, 181, .8);
+}
+
+.card__back::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 10px;
+  border: 1px solid rgba(236, 217, 169, .85);
+  background-image: radial-gradient(rgba(255, 255, 255, .3) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+}
+
+.card__back svg {
+  position: relative;
+  width: 38%;
+  fill: var(--blanco);
+  filter: drop-shadow(0 2px 4px rgba(61, 42, 107, .35));
+}
+
+/* Frente: el emoji (o la foto) */
+.card__front {
+  transform: rotateY(180deg);
+  font-size: clamp(1.6rem, 8.5vw, 2.5rem);
+  line-height: 1;
+  background: var(--blanco);
+  box-shadow: inset 0 0 0 2px var(--lila-200);
+}
+
+.card__front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card.is-matched .card__front {
+  background:
+    linear-gradient(var(--blanco), var(--blanco)) padding-box,
+    linear-gradient(135deg, var(--dorado-claro), var(--rosa-400), var(--lila-400)) border-box;
+  border: 3px solid transparent;
+  box-shadow: 0 0 18px rgba(171, 146, 228, .75);
+}
+
+.card.is-matched .card__emoji {
+  animation: pop .6s var(--ease-back);
+}
+
+.card[aria-disabled="true"] {
+  cursor: default;
+}
+
+/* Sacudida cuando no son pareja */
+.card.is-wrong .card__inner {
+  animation: sacudir .45s ease;
+}
+
+@keyframes sacudir {
+  0%, 100% { transform: rotateY(180deg) translateX(0); }
+  20%      { transform: rotateY(180deg) translateX(-6px); }
+  40%      { transform: rotateY(180deg) translateX(6px); }
+  60%      { transform: rotateY(180deg) translateX(-4px); }
+  80%      { transform: rotateY(180deg) translateX(4px); }
+}
+
+/* Panel del dato descubierto */
+.game__fact {
+  grid-area: fact;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  max-width: 520px;
+  min-height: 132px;
+  margin: 0 auto;
+  padding: 1.2rem 1.25rem;
+  border-radius: 22px;
+  background: var(--blanco);
+  border: 1px solid rgba(201, 182, 242, .45);
+  box-shadow: var(--sombra-sm);
+}
+
+.game__fact.is-new {
+  animation: datoNuevo .65s var(--ease-back);
+}
+
+@keyframes datoNuevo {
+  from { transform: scale(.94); opacity: .3; }
+}
+
+.game__fact-icon {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  line-height: 1;
+  border-radius: 16px;
+  background: var(--degradado-suave);
+}
+
+.game__fact-tag {
+  display: inline-block;
+  margin-bottom: .35rem;
+  padding: .12rem .6rem;
+  border-radius: 999px;
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--morado);
+  background: var(--lila-100);
+}
+
+.game__fact-title {
+  margin: 0 0 .2rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+.game__fact-text {
+  margin: 0;
+  font-size: .88rem;
+  line-height: 1.6;
+}
+
+/* Colección de datos descubiertos */
+.game__found {
+  grid-area: found;
+  text-align: center;
+}
+
+.game__mini-label {
+  margin-bottom: .55rem;
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.game__collection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .45rem;
+}
+
+.chip {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1.5px dashed var(--lila-300);
+  border-radius: 50%;
+  font-size: 1.1rem;
+  line-height: 1;
+  background: transparent;
+  cursor: pointer;
+  transition: box-shadow .3s ease, transform .3s var(--ease-back);
+}
+
+.chip:disabled {
+  cursor: default;
+}
+
+.chip.is-found {
+  border-color: transparent;
+  background: var(--blanco);
+  box-shadow: var(--sombra-sm);
+  animation: pop .5s var(--ease-back);
+}
+
+.chip.is-selected {
+  box-shadow: 0 0 0 2px var(--lila-400), var(--sombra-sm);
+}
+
+.game__actions {
+  grid-area: actions;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ---------------------------------------------------------
+   14. VENTANA DE VICTORIA
+   --------------------------------------------------------- */
+.win {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(47, 32, 86, .5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s ease, visibility .4s ease;
+}
+
+/* Al abrir, se hace visible al instante (así el botón puede recibir el foco);
+   al cerrar, espera a que termine el desvanecimiento */
+.win.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .4s ease, visibility 0s;
+}
+
+.win__card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 2.5rem);
+  max-height: calc(100svh - 2.5rem);
+  overflow-y: auto;
+  padding: 2.2rem 1.5rem 1.6rem;
+  border-radius: 28px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--lila-100), var(--blanco) 38%);
+  box-shadow: var(--sombra-lg);
+  transform: translateY(30px) scale(.92);
+  transition: transform .6s var(--ease-back);
+}
+
+.win.is-open .win__card {
+  transform: none;
+}
+
+.win__stars {
+  display: flex;
+  justify-content: center;
+  gap: .35rem;
+  margin-bottom: .7rem;
+}
+
+.win__star {
+  font-size: 2.3rem;
+  line-height: 1;
+  color: var(--lila-200);
+}
+
+.win__star.is-on {
+  color: var(--dorado);
+  text-shadow: 0 0 18px rgba(201, 164, 92, .6);
+}
+
+.win.is-open .win__star.is-on {
+  animation: pop .6s var(--ease-back) backwards;
+  animation-delay: calc(var(--i) * .18s + .35s);
+}
+
+.win__title {
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 6.5vw, 2.1rem);
+}
+
+.win__rank {
+  margin: .4rem 0 .2rem;
+  font-weight: 500;
+  font-size: .92rem;
+  color: var(--morado);
+}
+
+.win__stats {
+  font-size: .85rem;
+  color: var(--texto-suave);
+}
+
+.win__msg {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--tinta);
+}
+
+/* Cupón con muescas de ticket */
+.coupon {
+  position: relative;
+  margin: 1.3rem 0 1.5rem;
+  padding: 1.1rem 1.4rem 1rem;
+  border-radius: 16px;
+  border: 1.5px dashed var(--lila-400);
+  background: var(--degradado-suave);
+}
+
+.coupon::before,
+.coupon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: var(--blanco);
+}
+
+.coupon::before { left: -12px; }
+.coupon::after  { right: -12px; }
+
+.coupon__label {
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--morado);
+}
+
+.coupon__text {
+  margin: .3rem 0 .35rem;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.4;
+  color: var(--tinta);
+}
+
+.coupon__small {
+  font-size: .7rem;
+  color: var(--texto-suave);
+}
+
+.win__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+}
+
+
+/* ---------------------------------------------------------
+   15. SOBRE Y CARTA DE AMOR
+   --------------------------------------------------------- */
+.envelope-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 3.5rem;
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.envelope-wrap.is-gone {
+  opacity: 0;
+  transform: scale(.92);
+}
+
+.envelope {
+  position: relative;
+  width: min(340px, 82vw);
+  aspect-ratio: 3 / 2;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 900px;
+  filter: drop-shadow(0 20px 28px rgba(110, 82, 181, .28));
+  animation: flotar 4s ease-in-out infinite;
+}
+
+.envelope.is-open {
+  animation: none;
+  cursor: default;
+}
+
+.envelope > span {
+  position: absolute;
+  display: block;
+}
+
+/* Interior del sobre */
+.envelope__back {
+  inset: 0;
+  z-index: 0;
+  border-radius: 10px;
+  background: var(--lila-300);
+}
+
+/* Papel que asoma al abrir */
+.envelope__paper {
+  left: 8%;
+  right: 8%;
+  top: 8%;
+  bottom: 6%;
+  z-index: 1;
+  border-radius: 6px;
+  background-color: var(--perla);
+  background-image: repeating-linear-gradient(transparent 0 14px, #ece2f7 14px 15px);
+  transition: transform .9s var(--ease) .45s;
+}
+
+/* Frente del sobre (con la "V" arriba) */
+.envelope__front {
+  inset: 0;
+  z-index: 2;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #fad3e3, #efbcd4);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Solapa que se abre */
+.envelope__flap {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 58%;
+  z-index: 3;
+  background: linear-gradient(180deg, #ecc8ec, #d8b6ea);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top;
+  transition: transform .7s var(--ease), z-index 0s .35s;
+}
+
+/* Sello de cera morado */
+.envelope__seal {
+  top: 56%;
+  left: 50%;
+  z-index: 4;
+  width: 54px;
+  height: 54px;
+  display: grid !important;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  color: var(--rosa-200);
+  background: radial-gradient(circle at 35% 30%, #a58ae6, var(--morado-oscuro));
+  box-shadow: 0 6px 14px rgba(61, 42, 107, .45), inset 0 -3px 6px rgba(0, 0, 0, .2);
+  transform: translate(-50%, -50%);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.envelope.is-open .envelope__seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.5);
+}
+
+.envelope.is-open .envelope__flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope.is-open .envelope__paper {
+  transform: translateY(-42%);
+}
+
+.envelope-hint {
+  margin: 0;
+  font-size: .85rem;
+  letter-spacing: .05em;
+  color: var(--texto-suave);
+  animation: parpadeo 2.4s ease-in-out infinite;
+}
+
+/* La carta */
+.letter {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto 0;
+  padding: clamp(2.6rem, 7vw, 4rem) clamp(1.5rem, 6vw, 3.8rem) clamp(2rem, 6vw, 3.4rem);
+  border-radius: 8px;
+  background-color: var(--perla);
+  background-image:
+    radial-gradient(circle at 0 0, var(--rosa-100), transparent 45%),
+    radial-gradient(circle at 100% 100%, var(--lila-100), transparent 45%);
+  box-shadow: var(--sombra-lg);
+  opacity: 0;
+  transform: translateY(40px) scale(.96);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+
+/* Marco dorado interior */
+.letter::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201, 164, 92, .45);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.letter.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.letter__seal {
+  position: absolute;
+  top: -27px;
+  left: 50%;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  color: var(--rosa-200);
+  background: radial-gradient(circle at 35% 30%, #a58ae6, var(--morado-oscuro));
+  box-shadow: 0 6px 14px rgba(61, 42, 107, .45);
+  transform: translateX(-50%);
+}
+
+/* Los párrafos aparecen uno por uno (--i lo pone script.js) */
+.letter__body > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+  transition-delay: calc(var(--i, 0) * .35s + .4s);
+}
+
+.letter.is-visible .letter__body > * {
+  opacity: 1;
+  transform: none;
+}
+
+.letter__body p {
+  margin-bottom: 1.2rem;
+  font-size: clamp(.98rem, 2.6vw, 1.06rem);
+  line-height: 1.95;
+}
+
+.letter__greeting {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(2.2rem, 8vw, 2.9rem) !important;
+  line-height: 1.2 !important;
+  color: var(--morado);
+}
+
+.letter__signature {
+  margin: 2rem 0 0 !important;
+  text-align: right;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--texto-suave);
+}
+
+.letter__signature span {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--morado);
+}
+
+
+/* ---------------------------------------------------------
+   16. FOOTER
+   --------------------------------------------------------- */
+.footer {
+  padding: 3rem 1.25rem calc(7.5rem + var(--safe-bottom));
+  text-align: center;
+}
+
+.footer__script {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0 .15em;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.8rem, 11vw, 3.8rem);
+  line-height: 1.2;
+  background: linear-gradient(110deg, var(--rosa-500), var(--lila-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer__kr {
+  margin: .4rem 0 .6rem;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--lila-500);
+}
+
+.footer__text {
+  margin: 0;
+  font-size: .82rem;
+  color: var(--texto-suave);
+}
+
+.footer__text span {
+  color: var(--rosa-500);
+}
+
+
+/* ---------------------------------------------------------
+   17. LIGHTBOX (foto en pantalla completa)
+   --------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4.5rem 1rem 6rem;
+  background: rgba(30, 20, 52, .94);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .35s ease, visibility 0s;
+}
+
+.lightbox__figure {
+  margin: 0;
+  max-width: min(1000px, 100%);
+  text-align: center;
+}
+
+.lightbox__figure img {
+  max-width: 100%;
+  max-height: 72vh;
+  max-height: 72svh;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+}
+
+.lightbox__figure img.is-changing {
+  animation: zoomFoto .45s var(--ease);
+}
+
+@keyframes zoomFoto {
+  from { opacity: 0; transform: scale(.94); }
+}
+
+.lightbox__figure figcaption {
+  margin-top: 1rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #f1e6ff;
+}
+
+.lightbox__btn {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, .1);
+  color: var(--blanco);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .25s ease;
+}
+
+.lightbox__btn:hover {
+  background: rgba(255, 255, 255, .24);
+}
+
+.lightbox__close {
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.9rem;
+}
+
+/* En celular las flechas van abajo, cerca del pulgar */
+.lightbox__prev,
+.lightbox__next {
+  bottom: calc(1.4rem + var(--safe-bottom));
+}
+
+.lightbox__prev {
+  left: calc(50% - 64px);
+}
+
+.lightbox__next {
+  right: calc(50% - 64px);
+}
+
+.lightbox__counter {
+  position: absolute;
+  top: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .82rem;
+  letter-spacing: .12em;
+  color: rgba(255, 255, 255, .7);
+}
+
+
+/* ---------------------------------------------------------
+   18. BOTÓN DE MÚSICA
+   (en celular va encima del menú flotante)
+   --------------------------------------------------------- */
+.music-btn {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(5.1rem + var(--safe-bottom));
+  z-index: 750;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--blanco);
+  background: linear-gradient(135deg, var(--lila-500), var(--rosa-500));
+  box-shadow: 0 10px 24px -6px rgba(110, 82, 181, .6);
+  cursor: pointer;
+  transition: transform .25s var(--ease);
+}
+
+.music-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.music-btn .icon-pause {
+  display: none;
+}
+
+.music-btn.is-playing .icon-play {
+  display: none;
+}
+
+.music-btn.is-playing .icon-pause {
+  display: block;
+}
+
+/* Ondas mientras suena */
+.music-btn.is-playing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--lila-400);
+  animation: onda 1.8s ease-out infinite;
+}
+
+@keyframes onda {
+  from { transform: scale(1); opacity: .9; }
+  to   { transform: scale(1.7); opacity: 0; }
+}
+
+
+/* ---------------------------------------------------------
+   19. RESPONSIVE (tablet y computadora)
+   El diseño base es para celular; aquí se amplía.
+   --------------------------------------------------------- */
+@media (hover: hover) {
+  .btn--light:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(30, 14, 60, .35);
+  }
+
+  .btn--glow:hover {
+    transform: translateY(-3px);
+    background-position: 100% 0;
+  }
+
+  .btn--ghost:hover {
+    transform: translateY(-2px);
+    background: var(--blanco);
+  }
+
+  .music-btn:hover {
+    transform: scale(1.08);
+  }
+
+  .dock__link:hover {
+    color: var(--morado);
+  }
+
+  .dock__link.is-active:hover {
+    color: var(--blanco);
+  }
+
+  .dock__link:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .card:not(.is-flipped):hover {
+    transform: translateY(-4px);
+  }
+
+  .chip.is-found:hover {
+    transform: scale(1.12);
+  }
+}
+
+@media (min-width: 640px) {
+  .counter__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .gallery {
+    column-gap: 1.3rem;
+  }
+
+  .gallery__item {
+    margin-bottom: 1.8rem;
+    padding: .6rem .6rem 0;
+  }
+
+  .gallery__item figcaption {
+    padding: .7rem .4rem .85rem;
+    font-size: .95rem;
+  }
+
+  .timeline__card {
+    padding: 1.6rem 1.8rem 1.4rem;
+  }
+
+  .purple-card {
+    padding: 2.4rem 2.2rem 2.2rem;
+  }
+
+  .player {
+    padding: 2rem 1.6rem 1.4rem;
+  }
+
+  .player__top {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2.4rem;
+  }
+
+  .player__now {
+    margin: 0;
+    text-align: left;
+  }
+
+  .stat__num {
+    font-size: 1.4rem;
+  }
+
+  .stat__label {
+    font-size: .62rem;
+  }
+
+  .win__card {
+    padding: 2.6rem 2.2rem 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .music-btn {
+    right: 1.4rem;
+    bottom: calc(1.25rem + var(--safe-bottom));
+  }
+}
+
+@media (min-width: 960px) {
+  .gallery {
+    column-count: 3;
+    column-gap: 1.8rem;
+  }
+
+  .gallery__item {
+    margin-bottom: 2.2rem;
+  }
+
+  /* Línea de tiempo con tarjetas alternadas a cada lado */
+  .timeline__track {
+    left: 50%;
+  }
+
+  .timeline__item {
+    width: 50%;
+    padding-left: 0;
+    padding-right: 62px;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline__item:nth-of-type(even) {
+    margin-left: 50%;
+    padding-right: 0;
+    padding-left: 62px;
+  }
+
+  .timeline__item:nth-of-type(odd) .timeline__dot {
+    left: 100%;
+  }
+
+  .timeline__item:nth-of-type(even) .timeline__dot {
+    left: 0;
+  }
+
+  .timeline__item:nth-of-type(odd) .timeline__card {
+    text-align: right;
+  }
+
+  .timeline__item:nth-of-type(odd).is-visible {
+    animation-name: aparecerIzq;
+  }
+
+  .timeline__item:nth-of-type(even).is-visible {
+    animation-name: aparecerDer;
+  }
+
+  /* Borahae: tarjeta y tocadiscos lado a lado */
+  .borahae {
+    grid-template-columns: 1fr 1.08fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  .player__top {
+    gap: 2rem;
+  }
+
+  /* Juego: tablero a la izquierda, información a la derecha */
+  .game {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas:
+      "board stats"
+      "board fact"
+      "board found"
+      "board actions";
+    column-gap: 2.5rem;
+    row-gap: 1.25rem;
+    align-items: start;
+  }
+
+  .game__board {
+    max-width: none;
+  }
+
+  .game__stats,
+  .game__fact {
+    max-width: none;
+  }
+
+  .game__found {
+    text-align: left;
+  }
+
+  .game__collection {
+    justify-content: flex-start;
+  }
+
+  .game__actions {
+    justify-content: flex-start;
+  }
+
+  /* Flechas del lightbox a los costados */
+  .lightbox {
+    padding: 4.5rem 6rem;
+  }
+
+  .lightbox__prev,
+  .lightbox__next {
+    top: 50%;
+    bottom: auto;
+    margin-top: -24px;
+  }
+
+  .lightbox__prev {
+    left: 1.5rem;
+  }
+
+  .lightbox__next {
+    right: 1.5rem;
+  }
+
+  .lightbox__figure img {
+    max-height: 80vh;
+  }
+}
+
+
+/* En pantallas grandes y altas, la tarjeta morada te acompaña
+   mientras recorres la playlist */
+@media (min-width: 960px) and (min-height: 820px) {
+  .purple-card {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   20. ACCESIBILIDAD: si el teléfono tiene activado
+   "reducir movimiento", quitamos las animaciones
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .hearts,
+  .burst {
+    display: none;
+  }
+}

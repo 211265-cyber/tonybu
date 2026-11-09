@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#c9b6f2">
+  <meta name="description" content="Un álbum de recuerdos hecho con todo mi amor para tu cumpleaños.">
+
+  <!-- ✏️ Texto que aparece en la pestaña del navegador -->
+  <title>Feliz Cumpleaños, mi amor 💜</title>
+
+  <!-- Ícono de la pestaña: un corazón morado -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+
+  <!-- Tipografías de Google Fonts: Playfair Display (títulos) y Poppins (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Si el navegador no tiene JavaScript, se muestra todo igual -->
+  <noscript>
+    <style>.intro,.dock{display:none}body{overflow:auto}.reveal{opacity:1}</style>
+  </noscript>
+</head>
+
+<body class="is-locked">
+
+  <!-- Fondo: brillitos y corazones flotando (los corazones los crea script.js) -->
+  <div class="sky" aria-hidden="true"></div>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+
+  <!-- =====================================================
+       0. PANTALLA DE BIENVENIDA
+       Se abre con un toque (así también puede sonar la música)
+       ===================================================== -->
+  <div class="intro" id="intro">
+    <div class="intro__content">
+      <div class="intro__heart" aria-hidden="true">
+        <span class="intro__orbit"></span>
+        <svg viewBox="0 0 32 29">
+          <defs>
+            <linearGradient id="introHeart" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset=".55" stop-color="#f5bad0"/>
+              <stop offset="1" stop-color="#c9b6f2"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#introHeart)" d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 20.6 6.1-8.7 16-11.5 16-20.6C32 3.8 28.2 0 23.6 0z"/>
+        </svg>
+      </div>
+
+      <!-- ✏️ Puedes cambiar estos textos -->
+      <p class="intro__small">Hola, mi amor</p>
+      <p class="intro__title">Preparé algo especial para ti</p>
+      <p class="intro__hint">🎧 Sube el volumen</p>
+
+      <button class="btn btn--light" id="btnAbrir" type="button">
+        Abrir mi sorpresa <span aria-hidden="true">💜</span>
+      </button>
+
+      <p class="intro__kr">보라해 · I purple you</p>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       MENÚ FLOTANTE (aparece después de abrir la sorpresa)
+       ===================================================== -->
+  <nav class="dock" id="dock" aria-label="Secciones de la página">
+    <a class="dock__link" href="#inicio" data-label="Inicio">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
+      <span class="sr-only">Inicio</span>
+    </a>
+    <a class="dock__link" href="#album" data-label="Álbum">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg>
+      <span class="sr-only">Álbum</span>
+    </a>
+    <a class="dock__link" href="#historia" data-label="Historia">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span class="sr-only">Historia</span>
+    </a>
+    <a class="dock__link" href="#borahae" data-label="Borahae">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <span class="sr-only">Borahae</span>
+    </a>
+    <a class="dock__link" href="#juego" data-label="Juego">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11h4M8 9v4"/><path d="M15 12h.01M18 10h.01"/><path d="M17.3 5H6.7a4 4 0 0 0-3.96 3.43l-.73 5.1a3 3 0 0 0 5.09 2.67L9 14h6l1.9 2.2a3 3 0 0 0 5.09-2.67l-.73-5.1A4 4 0 0 0 17.3 5z"/></svg>
+      <span class="sr-only">Juego</span>
+    </a>
+    <a class="dock__link" href="#carta" data-label="Carta">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+      <span class="sr-only">Carta</span>
+    </a>
+  </nav>
+
+
+  <!-- =====================================================
+       1. HERO / PORTADA
+       ===================================================== -->
+  <header class="hero" id="inicio">
+    <div class="hero__content">
+
+      <div class="hero__photo reveal reveal--zoom">
+        <span class="hero__ring" aria-hidden="true"></span>
+        <!-- ✏️ FOTO DE PORTADA: pon tu foto favorita de los dos como images/portada.jpg -->
+        <img src="images/portada.jpg" alt="Nosotros dos">
+        <span class="hero__badge" aria-hidden="true">💜</span>
+      </div>
+
+      <!-- ✏️ Puedes cambiar esta frase -->
+      <p class="eyebrow reveal" style="--d:.15s">Para el amor de mi vida</p>
+
+      <!-- ✏️ CAMBIA "María" por el nombre de tu novia -->
+      <h1 class="hero__title reveal" style="--d:.3s">
+        Feliz Cumpleaños
+        <span class="hero__name">María</span>
+      </h1>
+
+      <!-- ✏️ Puedes cambiar esta frase -->
+      <p class="hero__subtitle reveal" style="--d:.45s">
+        Hoy el mundo celebra tu vida, y yo celebro la suerte de compartirla contigo.
+      </p>
+
+      <!-- Contador de tiempo juntos
+           ✏️ La fecha en que empezaron se cambia en script.js (CONFIG.fechaInicio) -->
+      <div class="counter reveal" style="--d:.6s">
+        <p class="counter__label">Llevamos juntos</p>
+        <div class="counter__grid">
+          <div class="counter__box"><span class="counter__num" id="c-anios">0</span><span class="counter__unit">Años</span></div>
+          <div class="counter__box"><span class="counter__num" id="c-meses">0</span><span class="counter__unit">Meses</span></div>
+          <div class="counter__box"><span class="counter__num" id="c-dias">0</span><span class="counter__unit">Días</span></div>
+          <div class="counter__box"><span class="counter__num" id="c-horas">00</span><span class="counter__unit">Horas</span></div>
+          <div class="counter__box"><span class="counter__num" id="c-minutos">00</span><span class="counter__unit">Minutos</span></div>
+          <div class="counter__box"><span class="counter__num" id="c-segundos">00</span><span class="counter__unit">Segundos</span></div>
+        </div>
+        <p class="counter__total">Son <strong id="c-total">0</strong> días a tu lado, y quiero muchísimos más 💜</p>
+      </div>
+    </div>
+
+    <a href="#album" class="scroll-cue" aria-label="Ir al álbum de fotos"><span></span></a>
+  </header>
+
+
+  <main>
+
+    <!-- =====================================================
+         2. ÁLBUM DE FOTOS (polaroids)
+         ===================================================== -->
+    <section class="section" id="album">
+      <div class="container">
+
+        <header class="section__header reveal">
+          <span class="eyebrow">Recuerdos que atesoro</span>
+          <h2 class="section__title">Nuestro Álbum</h2>
+          <div class="divider" aria-hidden="true"><span>♥</span></div>
+          <p class="section__text">Toca cualquier foto para verla en grande.</p>
+        </header>
+
+        <!-- ✏️ GALERÍA
+             - Pon tus fotos en la carpeta "images" y cambia "fotoX.jpg" por el nombre exacto
+               de cada una (sirve .jpg, .jpeg o .png). Ejemplo: images/playa.png
+             - Cambia el texto de <figcaption> por lo que quieras decir de cada foto.
+             - Para agregar más fotos, copia y pega un bloque <figure> ... </figure> completo. -->
+        <div class="gallery" id="gallery">
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto1.jpg" alt="Nuestra primera foto juntos" loading="lazy">
+            </div>
+            <figcaption>Nuestra primera foto juntos</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto2.jpg" alt="Esa sonrisa que me enamora" loading="lazy">
+            </div>
+            <figcaption>Esa sonrisa que me enamora</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto3.jpg" alt="Nuestro lugar favorito" loading="lazy">
+            </div>
+            <figcaption>Nuestro lugar favorito</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto4.jpg" alt="Aventuras contigo" loading="lazy">
+            </div>
+            <figcaption>Cada aventura es mejor contigo</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto5.jpg" alt="Tú y yo" loading="lazy">
+            </div>
+            <figcaption>Tú y yo, siempre</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto6.jpg" alt="Un día perfecto" loading="lazy">
+            </div>
+            <figcaption>Ese día perfecto</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto7.jpg" alt="Mi persona favorita" loading="lazy">
+            </div>
+            <figcaption>Mi persona favorita en el mundo</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto8.jpg" alt="Riendo juntos" loading="lazy">
+            </div>
+            <figcaption>Riéndonos de todo</figcaption>
+          </figure>
+
+          <figure class="gallery__item reveal">
+            <div class="gallery__frame">
+              <!-- Reemplaza aquí con tu foto -->
+              <img src="images/foto9.jpg" alt="Lo mejor está por venir" loading="lazy">
+            </div>
+            <figcaption>Lo mejor está por venir</figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         3. LÍNEA DE TIEMPO / NUESTRA HISTORIA
+         La línea se va llenando y cada momento se ilumina
+         a medida que bajas (lo hace script.js)
+         ===================================================== -->
+    <section class="section section--rosa" id="historia">
+      <div class="container">
+
+        <header class="section__header reveal">
+          <span class="eyebrow">Momento a momento</span>
+          <h2 class="section__title">Nuestra Historia</h2>
+          <div class="divider" aria-hidden="true"><span>♥</span></div>
+        </header>
+
+        <!-- ✏️ LÍNEA DE TIEMPO
+             - Cambia fechas, títulos, textos y el emoji de cada círculo.
+             - Para agregar un momento, copia y pega un bloque <article> ... </article> completo.
+             - Si quieres una foto en un momento, quita los símbolos de comentario a la línea <img>. -->
+        <div class="timeline" id="timeline">
+          <div class="timeline__track" aria-hidden="true"><span class="timeline__fill"></span></div>
+
+          <article class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true">✨</span>
+            <div class="timeline__card">
+              <time class="timeline__date">Marzo 2021</time>
+              <h3 class="timeline__title">El día que nos conocimos</h3>
+              <p>Sin saberlo, ese día empezó la historia más bonita de mi vida.</p>
+              <!-- <img class="timeline__img" src="images/historia1.jpg" alt="El día que nos conocimos" loading="lazy"> -->
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true">☕</span>
+            <div class="timeline__card">
+              <time class="timeline__date">Abril 2021</time>
+              <h3 class="timeline__title">Nuestra primera cita</h3>
+              <p>Los nervios, las risas y esa conversación que no quería que terminara nunca.</p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true">💞</span>
+            <div class="timeline__card">
+              <time class="timeline__date">14 de febrero, 2022</time>
+              <h3 class="timeline__title">Nos hicimos novios</h3>
+              <p>Me dijiste que sí, y desde entonces cada día tiene un motivo para sonreír.</p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true">🎧</span>
+            <div class="timeline__card">
+              <time class="timeline__date">Mayo 2022</time>
+              <h3 class="timeline__title">Me presentaste a BTS</h3>
+              <p>Me pusiste tu canción favorita, te vi cantarla con los ojos cerrados y entendí por qué los amas tanto.</p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true">✈️</span>
+            <div class="timeline__card">
+              <time class="timeline__date">Julio 2023</time>
+              <h3 class="timeline__title">Nuestro primer viaje</h3>
+              <p>Descubrí que mi lugar favorito no está en un mapa: está a tu lado.</p>
+            </div>
+          </article>
+
+          <article class="timeline__item reveal">
+            <span class="timeline__dot" aria-hidden="true">🎂</span>
+            <div class="timeline__card">
+              <time class="timeline__date">Hoy</time>
+              <h3 class="timeline__title">Tu cumpleaños</h3>
+              <p>Y aquí estamos, celebrándote. Gracias por existir y por elegirme cada día.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         4. BORAHAE 💜 — SECCIÓN ESPECIAL BTS
+         Tarjeta "I purple you" + tocadiscos con su playlist
+         ===================================================== -->
+    <section class="section section--lila" id="borahae">
+      <div class="container">
+
+        <header class="section__header reveal">
+          <span class="eyebrow">Para mi ARMY favorita</span>
+          <h2 class="section__title">Borahae <span class="section__kr">보라해 · I purple you</span></h2>
+          <div class="divider" aria-hidden="true"><span>💜</span></div>
+          <!-- ✏️ Puedes cambiar esta frase -->
+          <p class="section__text">Porque amo todo lo que tú amas, esta parte es para ti y para los siete chicos que te regalan tantas sonrisas.</p>
+        </header>
+
+        <div class="borahae">
+
+          <!-- Tarjeta morada con constelación de 7 estrellas (y en el centro, tú) -->
+          <article class="purple-card reveal">
+            <div class="constellation" aria-hidden="true">
+              <svg viewBox="0 0 220 124">
+                <defs>
+                  <path id="estrella" d="M0-7 1.7-1.7 7 0 1.7 1.7 0 7-1.7 1.7-7 0-1.7-1.7Z"/>
+                </defs>
+                <polyline class="constellation__line" points="110,40 78,20 46,46 70,82 110,110 150,82 174,46 142,20 110,40"/>
+                <use class="constellation__star" href="#estrella" x="78"  y="20"  style="--d:0s"/>
+                <use class="constellation__star" href="#estrella" x="46"  y="46"  style="--d:.4s"/>
+                <use class="constellation__star" href="#estrella" x="70"  y="82"  style="--d:.8s"/>
+                <use class="constellation__star" href="#estrella" x="110" y="110" style="--d:1.2s"/>
+                <use class="constellation__star" href="#estrella" x="150" y="82"  style="--d:1.6s"/>
+                <use class="constellation__star" href="#estrella" x="174" y="46"  style="--d:2s"/>
+                <use class="constellation__star" href="#estrella" x="142" y="20"  style="--d:2.4s"/>
+                <path class="constellation__heart" transform="translate(102 34) scale(.5)" d="M23.6 0c-3.4 0-6.3 2.7-7.6 5.6C14.7 2.7 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.4 9.5 11.9 16 20.6 6.1-8.7 16-11.5 16-20.6C32 3.8 28.2 0 23.6 0z"/>
+              </svg>
+              <p class="constellation__names">RM · Jin · SUGA · j-hope · Jimin · V · Jung Kook</p>
+            </div>
+
+            <h3>«I purple you»</h3>
+            <p>
+              En 2016, en un encuentro con sus fans, V inventó esta frase: como el morado es el último
+              color del arcoíris, <em>«I purple you»</em> significa
+              <strong>«te voy a amar y a confiar en ti por mucho, mucho tiempo»</strong>.
+            </p>
+
+            <!-- ✏️ MENSAJE PERSONAL sobre su amor por BTS: escríbelo a tu manera -->
+            <p class="purple-card__love">
+              Me encanta cómo se te iluminan los ojos cada vez que suena BTS. Así que hoy te lo digo
+              a su manera: te morado, mi amor. Hoy, mañana y hasta el último color del arcoíris.
+            </p>
+            <span class="purple-card__sign">— 보라해 💜</span>
+          </article>
+
+
+          <!-- Tocadiscos + playlist -->
+          <div class="player reveal" id="player" style="--d:.15s">
+
+            <div class="player__top">
+              <button class="player__deck" id="deck" type="button" aria-label="Reproducir música">
+                <span class="vinyl" id="vinyl">
+                  <span class="vinyl__label">
+                    <!-- ✏️ Foto en el centro del disco (puedes usar otra, ej. images/disco.jpg) -->
+                    <img src="images/portada.jpg" alt="">
+                  </span>
+                </span>
+                <svg class="tonearm" viewBox="0 0 60 120" aria-hidden="true">
+                  <circle cx="46" cy="12" r="10" class="tonearm__base"/>
+                  <circle cx="46" cy="12" r="4" class="tonearm__pin"/>
+                  <path d="M46 12 L40 70 L28 96" class="tonearm__arm"/>
+                  <rect x="20" y="92" width="14" height="10" rx="2" transform="rotate(25 27 97)" class="tonearm__head"/>
+                </svg>
+              </button>
+
+              <div class="player__now">
+                <span class="player__label" id="nowLabel">Toca el disco</span>
+                <p class="player__title" id="nowTitle">Nuestra canción 💜</p>
+                <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+              </div>
+            </div>
+
+            <h3 class="player__heading">Canciones que nos representan</h3>
+
+            <!-- ✏️ PLAYLIST
+                 Cada canción es un bloque <li> ... </li>. Puedes cambiar:
+                 - data-src  → el archivo mp3 en la carpeta "music" (si lo tienes, suena aquí mismo).
+                 - data-link → el enlace de YouTube o Spotify (si no hay mp3, se abre este enlace).
+                 - El título, el año y la frase de "por qué nos representa".
+                 Si no pones ningún mp3, no pasa nada: cada canción se abre en YouTube. -->
+            <ol class="playlist" id="playlist">
+
+              <li class="track" data-src="music/spring-day.mp3" data-link="https://www.youtube.com/results?search_query=BTS+Spring+Day">
+                <span class="track__num">01</span>
+                <div class="track__info">
+                  <p class="track__title">Spring Day</p>
+                  <p class="track__meta">BTS · 2017</p>
+                  <p class="track__why">Porque aunque haga frío afuera, a tu lado siempre es primavera.</p>
+                </div>
+              </li>
+
+              <li class="track" data-src="music/serendipity.mp3" data-link="https://www.youtube.com/results?search_query=BTS+Serendipity">
+                <span class="track__num">02</span>
+                <div class="track__info">
+                  <p class="track__title">Serendipity</p>
+                  <p class="track__meta">Jimin · 2017</p>
+                  <p class="track__why">Encontrarte fue la casualidad más bonita del universo.</p>
+                </div>
+              </li>
+
+              <li class="track" data-src="music/euphoria.mp3" data-link="https://www.youtube.com/results?search_query=BTS+Euphoria">
+                <span class="track__num">03</span>
+                <div class="track__info">
+                  <p class="track__title">Euphoria</p>
+                  <p class="track__meta">Jung Kook · 2018</p>
+                  <p class="track__why">Así se siente estar contigo: pura euforia.</p>
+                </div>
+              </li>
+
+              <li class="track" data-src="music/magic-shop.mp3" data-link="https://www.youtube.com/results?search_query=BTS+Magic+Shop">
+                <span class="track__num">04</span>
+                <div class="track__info">
+                  <p class="track__title">Magic Shop</p>
+                  <p class="track__meta">BTS · 2018</p>
+                  <p class="track__why">Porque juntos tenemos un lugar seguro que es solo nuestro.</p>
+                </div>
+              </li>
+
+              <li class="track" data-src="music/boy-with-luv.mp3" data-link="https://www.youtube.com/results?search_query=BTS+Boy+With+Luv">
+                <span class="track__num">05</span>
+                <div class="track__info">
+                  <p class="track__title">Boy With Luv</p>
+                  <p class="track__meta">BTS ft. Halsey · 2019</p>
+                  <p class="track__why">Me interesa todo de ti, hasta lo más pequeñito.</p>
+                </div>
+              </li>
+
+              <li class="track" data-src="music/dynamite.mp3" data-link="https://www.youtube.com/results?search_query=BTS+Dynamite">
+                <span class="track__num">06</span>
+                <div class="track__info">
+                  <p class="track__title">Dynamite</p>
+                  <p class="track__meta">BTS · 2020</p>
+                  <p class="track__why">Porque contigo hasta los días grises se iluminan.</p>
+                </div>
+              </li>
+
+            </ol>
+
+            <p class="player__note" id="playlistNote">Toca <span aria-hidden="true">↗</span> para escucharla en YouTube</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         5. MINIJUEGO: MEMORIA BORAHAE
+         ✏️ Las cartas y sus datos se cambian en script.js
+            (busca CARTAS_JUEGO). El mensaje final y el premio,
+            aquí abajo en la ventana de victoria.
+         ===================================================== -->
+    <section class="section" id="juego">
+      <div class="container">
+
+        <header class="section__header reveal">
+          <span class="eyebrow">Hora de jugar</span>
+          <h2 class="section__title">Memoria Borahae</h2>
+          <div class="divider" aria-hidden="true"><span>✦</span></div>
+          <p class="section__text">Encuentra las <strong id="gTotal">8</strong> parejas. Cada una esconde un dato sobre BTS… o un recuerdo nuestro. 💜</p>
+        </header>
+
+        <div class="game reveal">
+
+          <div class="game__stats">
+            <div class="stat"><span class="stat__num" id="gMoves">0</span><span class="stat__label">Movimientos</span></div>
+            <div class="stat"><span class="stat__num" id="gPairs">0/8</span><span class="stat__label">Parejas</span></div>
+            <div class="stat"><span class="stat__num" id="gTime">00:00</span><span class="stat__label">Tiempo</span></div>
+            <div class="stat"><span class="stat__num" id="gBest">—</span><span class="stat__label">Récord</span></div>
+          </div>
+
+          <!-- Aquí script.js reparte las cartas -->
+          <div class="game__board" id="board" role="group" aria-label="Tablero de cartas"></div>
+
+          <div class="game__fact" id="gFact" aria-live="polite">
+            <span class="game__fact-icon" id="gFactIcon" aria-hidden="true">✨</span>
+            <div>
+              <span class="game__fact-tag" id="gFactTag">Cómo jugar</span>
+              <p class="game__fact-title" id="gFactTitle">¿Lista, mi amor?</p>
+              <p class="game__fact-text" id="gFactText">Toca dos cartas para darles la vuelta. Si son iguales, se quedan descubiertas y te cuento un secreto.</p>
+            </div>
+          </div>
+
+          <div class="game__found">
+            <p class="game__mini-label">Datos descubiertos</p>
+            <div class="game__collection" id="gCollection"></div>
+          </div>
+
+          <div class="game__actions">
+            <button class="btn btn--ghost" id="gRestart" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+              Barajar de nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         6. CARTA DE AMOR
+         ===================================================== -->
+    <section class="section section--rosa letter-section" id="carta">
+      <div class="container">
+
+        <header class="section__header reveal">
+          <span class="eyebrow">Solo para tus ojos</span>
+          <h2 class="section__title">Una carta para ti</h2>
+          <div class="divider" aria-hidden="true"><span>♥</span></div>
+        </header>
+
+        <!-- Sobre: al tocarlo se abre y aparece la carta -->
+        <div class="envelope-wrap reveal" id="envelopeWrap">
+          <button class="envelope" id="envelope" type="button" aria-label="Abrir la carta">
+            <span class="envelope__back"></span>
+            <span class="envelope__paper"></span>
+            <span class="envelope__front"></span>
+            <span class="envelope__flap"></span>
+            <span class="envelope__seal">♥</span>
+          </button>
+          <p class="envelope-hint">Toca el sobre para abrirlo</p>
+        </div>
+
+        <!-- ✏️ CARTA: escribe aquí tu mensaje. Puedes agregar o quitar párrafos <p>. -->
+        <article class="letter" id="letter" hidden>
+          <span class="letter__seal" aria-hidden="true">♥</span>
+
+          <div class="letter__body">
+            <p class="letter__greeting">Mi amor,</p>
+
+            <p>
+              Hoy es tu día, y quise regalarte algo que no se pudiera envolver: un pedacito de
+              todo lo que hemos vivido juntos. Cada foto de este álbum guarda una risa, un abrazo
+              o una tarde que se volvió inolvidable solo porque estabas tú.
+            </p>
+
+            <p>
+              Gracias por tu paciencia, por tus abrazos que lo arreglan todo y por enseñarme que
+              el amor también se construye en los detalles pequeños. Contigo aprendí que los días
+              comunes pueden ser extraordinarios.
+            </p>
+
+            <p>
+              Deseo que este nuevo año de tu vida esté lleno de sueños cumplidos, de paz, de
+              conciertos inolvidables y de muchísimos motivos para sonreír. Y si me lo permites,
+              quiero seguir a tu lado para celebrarlos todos.
+            </p>
+
+            <p>
+              Feliz cumpleaños, mi vida. Te amo hoy, mañana y hasta el último color del arcoíris.
+              Borahae. 💜
+            </p>
+
+            <!-- ✏️ CAMBIA "Juan" por tu nombre -->
+            <p class="letter__signature">
+              Con todo mi amor,
+              <span>Juan</span>
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       7. FOOTER
+       ===================================================== -->
+  <footer class="footer">
+    <p class="footer__script">Te amo</p>
+    <p class="footer__kr">보라해 · hasta el último color del arcoíris</p>
+    <!-- ✏️ CAMBIA "Juan" por tu nombre -->
+    <p class="footer__text">Hecho con <span>♥</span> por Juan, solo para ti · 2026</p>
+  </footer>
+
+
+  <!-- =====================================================
+       VENTANA DE VICTORIA DEL JUEGO
+       ===================================================== -->
+  <div class="win" id="win" role="dialog" aria-modal="true" aria-labelledby="winTitle" aria-hidden="true">
+    <div class="win__card">
+      <div class="win__stars" aria-hidden="true">
+        <span class="win__star" style="--i:0">★</span>
+        <span class="win__star" style="--i:1">★</span>
+        <span class="win__star" style="--i:2">★</span>
+      </div>
+
+      <h3 class="win__title" id="winTitle">¡Lo lograste, mi amor!</h3>
+      <p class="win__rank" id="winRank"></p>
+      <p class="win__stats" id="winStats"></p>
+
+      <!-- ✏️ MENSAJE FINAL DEL JUEGO -->
+      <p class="win__msg">
+        Gracias por jugar conmigo. Ningún juego es tan bonito como la historia que escribimos juntos.
+      </p>
+
+      <!-- ✏️ PREMIO: cambia el vale por lo que quieras regalarle -->
+      <div class="coupon">
+        <span class="coupon__label">Premio desbloqueado</span>
+        <p class="coupon__text">Vale por una cita sorpresa + maratón de BTS con tus snacks favoritos 🍿</p>
+        <span class="coupon__small">Válido para siempre · canjeable con un abrazo</span>
+      </div>
+
+      <div class="win__actions">
+        <button class="btn btn--glow" id="winAgain" type="button">Jugar otra vez</button>
+        <button class="btn btn--ghost" id="winClose" type="button">Seguir viendo</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       LIGHTBOX: foto en pantalla completa
+       (no hace falta tocar nada aquí)
+       ===================================================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada" aria-hidden="true">
+    <span class="lightbox__counter" id="lbCounter"></span>
+    <button class="lightbox__btn lightbox__close" id="lbClose" type="button" aria-label="Cerrar">&times;</button>
+    <button class="lightbox__btn lightbox__prev" id="lbPrev" type="button" aria-label="Foto anterior">&#10094;</button>
+    <figure class="lightbox__figure">
+      <img id="lbImg" alt="">
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__next" id="lbNext" type="button" aria-label="Foto siguiente">&#10095;</button>
+  </div>
+
+
+  <!-- =====================================================
+       MÚSICA DE FONDO (opcional)
+       ✏️ Pon tu canción en la carpeta "music" con el nombre "cancion.mp3"
+          (puede ser su canción favorita de BTS).
+          Si no hay canción, el botón simplemente no aparece.
+       ===================================================== -->
+  <audio id="musica" src="music/cancion.mp3" loop preload="auto"></audio>
+
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Reproducir música" hidden>
+    <svg class="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>
+    </svg>
+  </button>
+
+
+  <script src="script.js" defer></script>
+</body>
+</html>
