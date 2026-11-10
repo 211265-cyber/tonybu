@@ -7,7 +7,7 @@
   <meta name="description" content="Un álbum de recuerdos hecho con todo mi amor para tu cumpleaños.">
 
   <!-- ✏️ Texto que aparece en la pestaña del navegador -->
-  <title>Feliz Cumpleaños, mi amor 💜</title>
+  <title>Feliz Cumpleaños, Sandra 💜</title>
 
   <!-- Ícono de la pestaña: un corazón morado -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="juegos.css">
 
   <!-- Si el navegador no tiene JavaScript, se muestra todo igual -->
   <noscript>
@@ -53,7 +54,7 @@
       </div>
 
       <!-- ✏️ Puedes cambiar estos textos -->
-      <p class="intro__small">Hola, mi amor</p>
+      <p class="intro__small">Hola, <span data-nombre>Sandra</span></p>
       <p class="intro__title">Preparé algo especial para ti</p>
       <p class="intro__hint">🎧 Sube el volumen</p>
 
@@ -74,6 +75,10 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>
       <span class="sr-only">Inicio</span>
     </a>
+    <a class="dock__link" href="#dias" data-label="Días preciosos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 9.5h18"/><path d="M12 18.2s-3.2-1.9-3.2-3.9a1.7 1.7 0 0 1 3.2-.8 1.7 1.7 0 0 1 3.2.8c0 2-3.2 3.9-3.2 3.9z"/></svg>
+      <span class="sr-only">Días preciosos</span>
+    </a>
     <a class="dock__link" href="#album" data-label="Álbum">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/></svg>
       <span class="sr-only">Álbum</span>
@@ -86,9 +91,13 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
       <span class="sr-only">Borahae</span>
     </a>
-    <a class="dock__link" href="#juego" data-label="Juego">
+    <a class="dock__link" href="#bangtan" data-label="Los 7 de BTS">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>
+      <span class="sr-only">Los 7 de BTS</span>
+    </a>
+    <a class="dock__link" href="#juegos" data-label="Juegos">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11h4M8 9v4"/><path d="M15 12h.01M18 10h.01"/><path d="M17.3 5H6.7a4 4 0 0 0-3.96 3.43l-.73 5.1a3 3 0 0 0 5.09 2.67L9 14h6l1.9 2.2a3 3 0 0 0 5.09-2.67l-.73-5.1A4 4 0 0 0 17.3 5z"/></svg>
-      <span class="sr-only">Juego</span>
+      <span class="sr-only">Juegos</span>
     </a>
     <a class="dock__link" href="#carta" data-label="Carta">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
@@ -101,6 +110,18 @@
        1. HERO / PORTADA
        ===================================================== -->
   <header class="hero" id="inicio">
+    <!-- Fotos decorativas de BTS alrededor de la portada -->
+    <div class="hero__decos" aria-hidden="true">
+      <figure class="deco deco--1"><img src="images/fondos/deco-1.jpg" alt=""></figure>
+      <figure class="deco deco--2"><img src="images/fondos/deco-2.jpg" alt=""></figure>
+      <figure class="deco deco--3"><img src="images/fondos/deco-3.jpg" alt=""></figure>
+      <figure class="deco deco--4"><img src="images/fondos/deco-4.jpg" alt=""></figure>
+      <span class="twinkle twinkle--1">✦</span>
+      <span class="twinkle twinkle--2">♥</span>
+      <span class="twinkle twinkle--3">✦</span>
+      <span class="twinkle twinkle--4">💜</span>
+    </div>
+
     <div class="hero__content">
 
       <div class="hero__photo reveal reveal--zoom">
@@ -113,10 +134,10 @@
       <!-- ✏️ Puedes cambiar esta frase -->
       <p class="eyebrow reveal" style="--d:.15s">Para el amor de mi vida</p>
 
-      <!-- ✏️ CAMBIA "María" por el nombre de tu novia -->
+      <!-- ✏️ Su nombre se cambia en script.js (CONFIG.nombre) -->
       <h1 class="hero__title reveal" style="--d:.3s">
         Feliz Cumpleaños
-        <span class="hero__name">María</span>
+        <span class="hero__name" data-nombre>Sandra</span>
       </h1>
 
       <!-- ✏️ Puedes cambiar esta frase -->
@@ -140,11 +161,79 @@
       </div>
     </div>
 
-    <a href="#album" class="scroll-cue" aria-label="Ir al álbum de fotos"><span></span></a>
+    <a href="#dias" class="scroll-cue" aria-label="Seguir bajando"><span></span></a>
   </header>
 
 
   <main>
+
+    <!-- =====================================================
+         1b. DÍAS PRECIOSOS
+         Cuenta cada segundo desde que ella nació.
+         ✏️ Su nombre completo y su fecha de nacimiento se
+            cambian en script.js (CONFIG.nombreCompleto y
+            CONFIG.fechaNacimiento).
+         ===================================================== -->
+    <section class="section dias" id="dias">
+      <div class="container">
+
+        <header class="section__header reveal">
+          <span class="eyebrow">Desde el 19 de octubre de 2002</span>
+          <h2 class="section__title">Días preciosos</h2>
+          <div class="divider" aria-hidden="true"><span>✦</span></div>
+          <p class="section__text">El día que naciste, el mundo se volvió un poquito más bonito. Y yo quiero llevar la cuenta de cada segundo.</p>
+        </header>
+
+        <div class="dias__grid">
+
+          <!-- Certificado -->
+          <article class="birth reveal">
+            <span class="birth__ribbon" aria-hidden="true">💜</span>
+            <span class="birth__label">Certificado de existencia preciosa</span>
+            <p class="birth__name" id="dNombre">Sandra Milagros Huamán Choque</p>
+            <div class="birth__rows">
+              <div class="birth__row"><span>Llegó al mundo</span><strong id="dFecha">Sábado, 19 de octubre de 2002</strong></div>
+              <div class="birth__row"><span>Signo</span><strong id="dSigno">Libra ♎</strong></div>
+              <div class="birth__row"><span>Edad</span><strong id="dEdad">—</strong></div>
+              <div class="birth__row"><span>Estado</span><strong>Amada infinitamente</strong></div>
+            </div>
+            <!-- ✏️ Puedes cambiar esta frase -->
+            <p class="birth__note">Hasta tu nombre lo dice: eres mi milagro. ✨</p>
+            <span class="birth__stamp" aria-hidden="true">보라해</span>
+          </article>
+
+          <!-- Contador de vida -->
+          <div class="life reveal" style="--d:.12s">
+            <p class="life__label">Llevas iluminando el mundo</p>
+            <p class="life__big"><span id="dTotal">0</span><small>días</small></p>
+            <p class="life__detail" id="dDetalle"></p>
+            <div class="life__clock">
+              <div class="counter__box"><span class="counter__num" id="dHoras">00</span><span class="counter__unit">Horas</span></div>
+              <div class="counter__box"><span class="counter__num" id="dMinutos">00</span><span class="counter__unit">Minutos</span></div>
+              <div class="counter__box"><span class="counter__num" id="dSegundos">00</span><span class="counter__unit">Segundos</span></div>
+            </div>
+            <div class="life__next">
+              <span class="life__next-icon" aria-hidden="true">🎂</span>
+              <div class="life__next-body">
+                <p class="life__next-title" id="dProximoTitulo">Tu próximo cumpleaños</p>
+                <p class="life__next-text" id="dProximoTexto"></p>
+                <span class="life__bar" id="dBarra" aria-hidden="true"><i></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curiosidades de su vida -->
+        <div class="sparks">
+          <div class="spark reveal"><span class="spark__icon" aria-hidden="true">💓</span><strong class="spark__num" id="dLatidos">0</strong><span class="spark__text">latidos de tu corazón (más o menos)</span></div>
+          <div class="spark reveal" style="--d:.08s"><span class="spark__icon" aria-hidden="true">🌕</span><strong class="spark__num" id="dLunas">0</strong><span class="spark__text">lunas llenas has visto</span></div>
+          <div class="spark reveal" style="--d:.16s"><span class="spark__icon" aria-hidden="true">☀️</span><strong class="spark__num" id="dVueltas">0</strong><span class="spark__text">vueltas al sol</span></div>
+          <div class="spark reveal"><span class="spark__icon" aria-hidden="true">🎤</span><strong class="spark__num" id="dDebut">—</strong><span class="spark__text">tenías cuando BTS debutó, el 13 de junio de 2013</span></div>
+          <div class="spark reveal" style="--d:.08s"><span class="spark__icon" aria-hidden="true">🐥</span><strong class="spark__num">6 días</strong><span class="spark__text">después de Jimin naciste tú: él el 13 y tú el 19 de octubre</span></div>
+          <div class="spark reveal" style="--d:.16s"><span class="spark__icon" aria-hidden="true">💜</span><strong class="spark__num" id="dJuntos">0</strong><span class="spark__text">de esos días los hemos vivido juntos</span></div>
+        </div>
+      </div>
+    </section>
 
     <!-- =====================================================
          2. ÁLBUM DE FOTOS (polaroids)
@@ -478,53 +567,198 @@
 
 
     <!-- =====================================================
-         5. MINIJUEGO: MEMORIA BORAHAE
-         ✏️ Las cartas y sus datos se cambian en script.js
-            (busca CARTAS_JUEGO). El mensaje final y el premio,
-            aquí abajo en la ventana de victoria.
+         4b. LOS 7 DE BANGTAN
+         ✏️ Las fotos y los datos se cambian en script.js
+            (busca BANGTAN). Las tarjetas se crean solas.
          ===================================================== -->
-    <section class="section" id="juego">
+    <section class="section bangtan" id="bangtan">
+      <div class="container">
+        <header class="section__header reveal">
+          <span class="eyebrow">Siete estrellas</span>
+          <h2 class="section__title">Los 7 de Bangtan</h2>
+          <div class="divider" aria-hidden="true"><span>💜</span></div>
+          <p class="section__text">Toca una tarjeta para darle la vuelta. Y elige a tu bias con el corazoncito: los juegos lo van a recordar.</p>
+          <p class="bias-pill" id="biasLabel">Todavía no eliges a tu bias</p>
+        </header>
+      </div>
+
+      <div class="members-wrap reveal">
+        <div class="members" id="members" aria-label="Integrantes de BTS"></div>
+        <div class="members__nav">
+          <button class="members__arrow" id="membersPrev" type="button" aria-label="Integrante anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+          </button>
+          <div class="members__dots" id="membersDots"></div>
+          <button class="members__arrow" id="membersNext" type="button" aria-label="Integrante siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="container">
+        <aside class="sabias reveal">
+          <span class="sabias__icon" id="sabiasIcono" aria-hidden="true">💜</span>
+          <div class="sabias__body">
+            <span class="sabias__tag">¿Sabías que…?</span>
+            <p class="sabias__text" id="sabiasTexto" aria-live="polite"></p>
+          </div>
+          <button class="sabias__btn" id="sabiasOtro" type="button">Otro dato</button>
+        </aside>
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         5. SALA DE JUEGOS
+         Cada tarjeta abre su juego en pantalla completa.
+         Los juegos están al final de esta página (busca "SALAS")
+         y su código en juegos.js (y en script.js los dos primeros).
+         ===================================================== -->
+    <section class="section arcade" id="juegos">
+      <div class="arcade__bg" aria-hidden="true"></div>
       <div class="container">
 
         <header class="section__header reveal">
           <span class="eyebrow">Hora de jugar</span>
-          <h2 class="section__title">Memoria Borahae</h2>
+          <h2 class="section__title">Sala de juegos</h2>
           <div class="divider" aria-hidden="true"><span>✦</span></div>
-          <p class="section__text">Encuentra las <strong id="gTotal">8</strong> parejas. Cada una esconde un dato sobre BTS… o un recuerdo nuestro. 💜</p>
+          <p class="section__text">Seis juegos hechos solo para ti, con tus chicos favoritos. Elige uno y que empiece la diversión. 🎮</p>
         </header>
 
-        <div class="game reveal">
+        <div class="arcade__grid">
 
-          <div class="game__stats">
-            <div class="stat"><span class="stat__num" id="gMoves">0</span><span class="stat__label">Movimientos</span></div>
-            <div class="stat"><span class="stat__num" id="gPairs">0/8</span><span class="stat__label">Parejas</span></div>
-            <div class="stat"><span class="stat__num" id="gTime">00:00</span><span class="stat__label">Tiempo</span></div>
-            <div class="stat"><span class="stat__num" id="gBest">—</span><span class="stat__label">Récord</span></div>
-          </div>
+          <button class="gcard reveal" type="button" data-abrir-sala="memoria" style="--tono:#f19cbf">
+            <span class="gart gart--memoria" aria-hidden="true">
+              <i class="mcard is-up" style="--r:-7deg;background-image:url(images/bts/caras/jimin-3.jpg)"></i>
+              <i class="mcard" style="--r:5deg"></i>
+              <i class="mcard is-up" style="--r:-3deg;background-image:url(images/bts/caras/jungkook-1.jpg)"></i>
+              <i class="mcard" style="--r:-6deg"></i>
+              <i class="mcard is-up" style="--r:4deg;background-image:url(images/bts/caras/v-2.jpg)"></i>
+              <i class="mcard is-up" style="--r:-4deg;background-image:url(images/bts/caras/jimin-3.jpg)"></i>
+            </span>
+            <span class="gcard__info">
+              <span class="gcard__tag">Memoria</span>
+              <span class="gcard__title">Memoria Borahae</span>
+              <span class="gcard__text">Voltea las cartas y encuentra las parejas de Bangtan.</span>
+              <span class="gcard__foot"><span class="gcard__best" data-record="memoria">Sin récord aún</span><span class="gcard__play">Jugar</span></span>
+            </span>
+          </button>
 
-          <!-- Aquí script.js reparte las cartas -->
-          <div class="game__board" id="board" role="group" aria-label="Tablero de cartas"></div>
+          <button class="gcard reveal" type="button" data-abrir-sala="gusanito" style="--tono:#ab92e4;--d:.06s">
+            <span class="gart gart--gusanito" aria-hidden="true">
+              <svg viewBox="0 0 200 130">
+                <defs>
+                  <radialGradient id="gcCabeza" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#b29af0"/><stop offset="1" stop-color="#6e52b5"/></radialGradient>
+                  <clipPath id="gcClip"><circle cx="150" cy="36" r="19"/></clipPath>
+                </defs>
+                <circle cx="150" cy="36" r="24" fill="none" stroke="#f3c66e" stroke-width="4" stroke-dasharray="110 200" stroke-linecap="round"/>
+                <circle cx="150" cy="36" r="21" fill="#fff"/>
+                <image href="images/bts/caras/suga-1.jpg" x="131" y="17" width="38" height="38" clip-path="url(#gcClip)" preserveAspectRatio="xMidYMid slice"/>
+                <circle cx="34" cy="96" r="11" fill="#ec9bbb"/>
+                <circle cx="52" cy="90" r="12.5" fill="#e3a8d6"/>
+                <circle cx="72" cy="86" r="13.5" fill="#c9a9ea"/>
+                <circle cx="93" cy="85" r="14.5" fill="#b49ae3"/>
+                <circle cx="114" cy="87" r="15" fill="#a185dc"/>
+                <path d="M128 70 q8 -18 16 -16" stroke="#6e52b5" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M144 78 q14 -10 20 -4" stroke="#6e52b5" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <circle cx="144" cy="54" r="4.5" fill="#ec9bbb"/>
+                <circle cx="164" cy="74" r="4.5" fill="#ec9bbb"/>
+                <circle cx="138" cy="88" r="20" fill="url(#gcCabeza)"/>
+                <circle cx="134" cy="83" r="5.5" fill="#fff"/><circle cx="135.5" cy="83" r="3" fill="#2e1f52"/>
+                <circle cx="148" cy="85" r="5.5" fill="#fff"/><circle cx="149.5" cy="85" r="3" fill="#2e1f52"/>
+                <circle cx="128" cy="93" r="3.5" fill="#f7a6c8" opacity=".85"/><circle cx="152" cy="96" r="3.5" fill="#f7a6c8" opacity=".85"/>
+                <path d="M176 92c-2.6-4.4-9-3.2-9 1.8 0 4.4 5.6 7 9 10.6 3.4-3.6 9-6.2 9-10.6 0-5-6.4-6.2-9-1.8z" fill="#f5a3c4"/>
+              </svg>
+            </span>
+            <span class="gcard__info">
+              <span class="gcard__tag">Clásico</span>
+              <span class="gcard__title">Gusanito Borahae</span>
+              <span class="gcard__text">Come corazones, atrapa caritas y desbloquea mensajitos.</span>
+              <span class="gcard__foot"><span class="gcard__best" data-record="gusanito">Sin récord aún</span><span class="gcard__play">Jugar</span></span>
+            </span>
+          </button>
 
-          <div class="game__fact" id="gFact" aria-live="polite">
-            <span class="game__fact-icon" id="gFactIcon" aria-hidden="true">✨</span>
-            <div>
-              <span class="game__fact-tag" id="gFactTag">Cómo jugar</span>
-              <p class="game__fact-title" id="gFactTitle">¿Lista, mi amor?</p>
-              <p class="game__fact-text" id="gFactText">Toca dos cartas para darles la vuelta. Si son iguales, se quedan descubiertas y te cuento un secreto.</p>
-            </div>
-          </div>
+          <button class="gcard reveal" type="button" data-abrir-sala="torre" style="--tono:#8fb1f2;--d:.12s">
+            <span class="gart gart--torre" aria-hidden="true">
+              <span class="mini-board">
+                <i style="--x:2;--y:1;--c:#8fb1f2;background-image:url(images/bts/caras/suga-1.jpg)"></i>
+                <i style="--x:3;--y:1;--c:#8fb1f2;background-image:url(images/bts/caras/suga-1.jpg)"></i>
+                <i style="--x:4;--y:1;--c:#8fb1f2;background-image:url(images/bts/caras/suga-1.jpg)"></i>
+                <i style="--x:3;--y:2;--c:#8fb1f2;background-image:url(images/bts/caras/suga-1.jpg)"></i>
+                <i style="--x:6;--y:3;--c:#8d70d0;background-image:url(images/bts/caras/rm-2.jpg)"></i>
+                <i style="--x:6;--y:4;--c:#8d70d0;background-image:url(images/bts/caras/rm-2.jpg)"></i>
+                <i style="--x:6;--y:5;--c:#8d70d0;background-image:url(images/bts/caras/rm-2.jpg)"></i>
+                <i style="--x:6;--y:6;--c:#8d70d0;background-image:url(images/bts/caras/rm-2.jpg)"></i>
+                <i style="--x:3;--y:4;--c:#7ccfc2;background-image:url(images/bts/caras/v-2.jpg)"></i>
+                <i style="--x:3;--y:5;--c:#7ccfc2;background-image:url(images/bts/caras/v-2.jpg)"></i>
+                <i style="--x:3;--y:6;--c:#7ccfc2;background-image:url(images/bts/caras/v-2.jpg)"></i>
+                <i style="--x:4;--y:6;--c:#7ccfc2;background-image:url(images/bts/caras/v-2.jpg)"></i>
+                <i style="--x:4;--y:4;--c:#f3c66e;background-image:url(images/bts/caras/jhope-1.jpg)"></i>
+                <i style="--x:4;--y:5;--c:#f3c66e;background-image:url(images/bts/caras/jhope-1.jpg)"></i>
+                <i style="--x:5;--y:5;--c:#f3c66e;background-image:url(images/bts/caras/jhope-1.jpg)"></i>
+                <i style="--x:5;--y:6;--c:#f3c66e;background-image:url(images/bts/caras/jhope-1.jpg)"></i>
+                <i style="--x:1;--y:5;--c:#f19cbf;background-image:url(images/bts/caras/jin-1.jpg)"></i>
+                <i style="--x:2;--y:5;--c:#f19cbf;background-image:url(images/bts/caras/jin-1.jpg)"></i>
+                <i style="--x:1;--y:6;--c:#f19cbf;background-image:url(images/bts/caras/jin-1.jpg)"></i>
+                <i style="--x:2;--y:6;--c:#f19cbf;background-image:url(images/bts/caras/jin-1.jpg)"></i>
+              </span>
+            </span>
+            <span class="gcard__info">
+              <span class="gcard__tag">Bloques</span>
+              <span class="gcard__title">Torre Borahae</span>
+              <span class="gcard__text">Encaja las piezas de Bangtan y completa líneas.</span>
+              <span class="gcard__foot"><span class="gcard__best" data-record="torre">Sin récord aún</span><span class="gcard__play">Jugar</span></span>
+            </span>
+          </button>
 
-          <div class="game__found">
-            <p class="game__mini-label">Datos descubiertos</p>
-            <div class="game__collection" id="gCollection"></div>
-          </div>
+          <button class="gcard reveal" type="button" data-abrir-sala="lluvia" style="--tono:#f5a58c">
+            <span class="gart gart--lluvia" aria-hidden="true">
+              <i class="drop drop--face" style="--x:16%;--y:12%;--s:38px;--c:#c79bf0;background-image:url(images/bts/caras/jungkook-3.jpg)"></i>
+              <i class="drop drop--heart" style="--x:47%;--y:6%">♥</i>
+              <i class="drop drop--face" style="--x:70%;--y:26%;--s:32px;--c:#8d70d0;background-image:url(images/bts/caras/rm-2.jpg)"></i>
+              <i class="drop drop--heart" style="--x:33%;--y:40%">♥</i>
+              <i class="drop drop--star" style="--x:85%;--y:4%">★</i>
+              <i class="drop drop--face" style="--x:52%;--y:48%;--s:28px;--c:#f5a58c;background-image:url(images/bts/caras/jimin-1.jpg)"></i>
+              <span class="mini-cloud"><b></b></span>
+            </span>
+            <span class="gcard__info">
+              <span class="gcard__tag">Reflejos</span>
+              <span class="gcard__title">Lluvia de amor</span>
+              <span class="gcard__text">Atrapa corazones y a tus chicos. ¡Esquiva las nubes!</span>
+              <span class="gcard__foot"><span class="gcard__best" data-record="lluvia">Sin récord aún</span><span class="gcard__play">Jugar</span></span>
+            </span>
+          </button>
 
-          <div class="game__actions">
-            <button class="btn btn--ghost" id="gRestart" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-              Barajar de nuevo
-            </button>
-          </div>
+          <button class="gcard reveal" type="button" data-abrir-sala="quien" style="--tono:#7ccfc2;--d:.06s">
+            <span class="gart gart--quien" aria-hidden="true">
+              <span class="mystery"><img src="images/bts/caras/v-1.jpg" alt=""></span>
+              <span class="mystery__q">?</span>
+              <span class="mystery__opts"><i>RM</i><i>V</i><i>Jin</i></span>
+            </span>
+            <span class="gcard__info">
+              <span class="gcard__tag">Trivia ARMY</span>
+              <span class="gcard__title">¿Quién es?</span>
+              <span class="gcard__text">Adivina quién se esconde detrás de la foto borrosa.</span>
+              <span class="gcard__foot"><span class="gcard__best" data-record="quien">Sin récord aún</span><span class="gcard__play">Jugar</span></span>
+            </span>
+          </button>
+
+          <button class="gcard reveal" type="button" data-abrir-sala="puzzle" style="--tono:#f3c66e;--d:.12s">
+            <span class="gart gart--puzzle" aria-hidden="true">
+              <span class="mini-puzzle" style="--foto:url(images/bts/cuadradas/jhope.jpg)">
+                <i style="--col:0;--fila:0"></i><i style="--col:1;--fila:0"></i><i style="--col:2;--fila:0"></i>
+                <i style="--col:0;--fila:1"></i><i style="--col:1;--fila:1"></i><i style="--col:2;--fila:1"></i>
+                <i style="--col:0;--fila:2"></i><i class="is-moving" style="--col:1;--fila:2"></i><b></b>
+              </span>
+            </span>
+            <span class="gcard__info">
+              <span class="gcard__tag">Puzzle</span>
+              <span class="gcard__title">Rompecabezas</span>
+              <span class="gcard__text">Arma la foto de tu integrante favorito.</span>
+              <span class="gcard__foot"><span class="gcard__best" data-record="puzzle">Sin récord aún</span><span class="gcard__play">Jugar</span></span>
+            </span>
+          </button>
+
         </div>
       </div>
     </section>
@@ -610,6 +844,270 @@
 
 
   <!-- =====================================================
+       SALAS: cada juego en pantalla completa
+       (se abren desde la Sala de juegos)
+       ===================================================== -->
+
+  <!-- Memoria Borahae · ✏️ las cartas se cambian en script.js (CARTAS_JUEGO) -->
+  <div class="room" id="sala-memoria" role="dialog" aria-modal="true" aria-labelledby="titulo-memoria">
+    <header class="room__bar">
+      <button class="room__back" type="button" data-cerrar-sala aria-label="Volver a la sala de juegos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg><span>Juegos</span></button>
+      <h2 class="room__title" id="titulo-memoria">Memoria Borahae</h2>
+      <span class="room__spacer" aria-hidden="true"></span>
+    </header>
+    <div class="room__body">
+      <p class="room__intro">Encuentra las <strong id="gTotal">8</strong> parejas. Cada integrante esconde un dato… y hay una carta especial para ti. 💜</p>
+      <div class="game">
+
+        <div class="game__stats">
+          <div class="stat"><span class="stat__num" id="gMoves">0</span><span class="stat__label">Movimientos</span></div>
+          <div class="stat"><span class="stat__num" id="gPairs">0/8</span><span class="stat__label">Parejas</span></div>
+          <div class="stat"><span class="stat__num" id="gTime">00:00</span><span class="stat__label">Tiempo</span></div>
+          <div class="stat"><span class="stat__num" id="gBest">—</span><span class="stat__label">Récord</span></div>
+        </div>
+
+        <!-- Aquí script.js reparte las cartas -->
+        <div class="game__board" id="board" role="group" aria-label="Tablero de cartas"></div>
+
+        <div class="game__fact" id="gFact" aria-live="polite">
+          <span class="game__fact-icon" id="gFactIcon" aria-hidden="true">✨</span>
+          <div>
+            <span class="game__fact-tag" id="gFactTag">Cómo jugar</span>
+            <p class="game__fact-title" id="gFactTitle">¿Lista, mi amor?</p>
+            <p class="game__fact-text" id="gFactText">Toca dos cartas para darles la vuelta. Si son iguales, se quedan descubiertas y te cuento un secreto.</p>
+          </div>
+        </div>
+
+        <div class="game__found">
+          <p class="game__mini-label">Datos descubiertos</p>
+          <div class="game__collection" id="gCollection"></div>
+        </div>
+
+        <div class="game__actions">
+          <button class="btn btn--ghost" id="gRestart" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            Barajar de nuevo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gusanito Borahae · ✏️ los mensajitos se cambian en script.js (MENSAJES_GUSANITO) -->
+  <div class="room" id="sala-gusanito" role="dialog" aria-modal="true" aria-labelledby="titulo-gusanito">
+    <header class="room__bar">
+      <button class="room__back" type="button" data-cerrar-sala aria-label="Volver a la sala de juegos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg><span>Juegos</span></button>
+      <h2 class="room__title" id="titulo-gusanito">Gusanito Borahae</h2>
+      <span class="room__spacer" aria-hidden="true"></span>
+    </header>
+    <div class="room__body">
+      <p class="room__intro">Come corazones 💜 y atrapa las caritas de Bangtan (valen triple). Cada <strong id="wCada">5</strong> corazones desbloqueas un mensajito mío. ¡No te muerdas la colita!</p>
+      <div class="worm">
+
+        <div class="worm__stats">
+          <div class="stat"><span class="stat__num" id="wScore">0</span><span class="stat__label">Corazones</span></div>
+          <div class="stat"><span class="stat__num" id="wLength">3</span><span class="stat__label">Largo</span></div>
+          <div class="stat"><span class="stat__num" id="wLevel">1</span><span class="stat__label">Nivel</span></div>
+          <div class="stat"><span class="stat__num" id="wBest">—</span><span class="stat__label">Récord</span></div>
+        </div>
+
+        <!-- Aquí script.js dibuja el juego -->
+        <div class="worm__stage" id="wStage" tabindex="0" aria-label="Tablero del gusanito. Usa las flechas para moverlo.">
+          <canvas class="worm__canvas" id="wCanvas"></canvas>
+
+          <div class="worm__overlay is-shown" id="wOverlay">
+            <div class="worm__panel">
+              <span class="worm__emoji" id="wOvEmoji" aria-hidden="true">🐛</span>
+              <p class="worm__ov-title" id="wOvTitle">¿Jugamos, mi amor?</p>
+              <p class="worm__ov-text" id="wOvText">Usa las flechas del teclado o desliza el dedo sobre el tablero.</p>
+              <button class="btn btn--glow" id="wPlay" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>
+                <span id="wPlayText">Empezar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cruz de control (solo se ve en celulares) -->
+        <div class="worm__pad" aria-label="Controles">
+          <button class="worm__key worm__key--up" type="button" data-dir="arriba" aria-label="Arriba"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
+          <button class="worm__key worm__key--left" type="button" data-dir="izquierda" aria-label="Izquierda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button class="worm__key worm__key--pause" type="button" id="wPause" aria-label="Pausa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg></button>
+          <button class="worm__key worm__key--right" type="button" data-dir="derecha" aria-label="Derecha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          <button class="worm__key worm__key--down" type="button" data-dir="abajo" aria-label="Abajo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        </div>
+
+        <p class="worm__hint">
+          <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> para moverte · <kbd>Espacio</kbd> para pausar
+        </p>
+
+        <div class="game__fact" id="wNote" aria-live="polite">
+          <span class="game__fact-icon" id="wNoteIcon" aria-hidden="true">💌</span>
+          <div>
+            <span class="game__fact-tag" id="wNoteTag">Mensajitos</span>
+            <p class="game__fact-title" id="wNoteTitle">Hay notitas escondidas</p>
+            <p class="game__fact-text" id="wNoteText">Come corazones para ir descubriéndolas. Te escribí una para cada paso del gusanito.</p>
+          </div>
+        </div>
+
+        <div class="worm__notes">
+          <p class="game__mini-label">Mensajitos desbloqueados · <span id="wNotesCount">0</span></p>
+          <div class="worm__dots" id="wDots"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Torre Borahae (bloques que caen) -->
+  <div class="room" id="sala-torre" role="dialog" aria-modal="true" aria-labelledby="titulo-torre">
+    <header class="room__bar">
+      <button class="room__back" type="button" data-cerrar-sala aria-label="Volver a la sala de juegos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg><span>Juegos</span></button>
+      <h2 class="room__title" id="titulo-torre">Torre Borahae</h2>
+      <span class="room__spacer" aria-hidden="true"></span>
+    </header>
+    <div class="room__body room__body--wide">
+      <div class="torre">
+        <div class="torre__main">
+          <div class="torre__stage" id="tStage" tabindex="0" aria-label="Tablero de la Torre Borahae">
+            <canvas class="torre__canvas" id="tCanvas"></canvas>
+          <div class="ov is-shown" id="tOverlay">
+            <div class="ov__panel">
+              <span class="ov__emoji" data-ov="emoji" aria-hidden="true">🧱</span>
+              <p class="ov__title" data-ov="titulo">Torre Borahae</p>
+              <p class="ov__text" data-ov="texto">Cada integrante es una pieza. Encájalas y completa líneas para que desaparezcan. ¡Si borras cuatro a la vez es un BORAHAE!</p>
+              <button class="btn btn--glow" type="button" data-ov="boton"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span data-ov="boton-texto">Empezar</span></button>
+            </div>
+          </div>
+          </div>
+          <aside class="torre__side">
+            <div class="torre__next">
+              <span class="mini-stat__label">Siguiente</span>
+              <canvas class="torre__next-canvas" id="tNext"></canvas>
+              <span class="torre__next-name" id="tNextName">—</span>
+            </div>
+            <div class="mini-stat"><span class="mini-stat__label">Puntos</span><strong class="mini-stat__num" id="tScore">0</strong></div>
+            <div class="mini-stat"><span class="mini-stat__label">Líneas</span><strong class="mini-stat__num" id="tLines">0</strong></div>
+            <div class="mini-stat"><span class="mini-stat__label">Nivel</span><strong class="mini-stat__num" id="tLevel">1</strong></div>
+            <div class="mini-stat"><span class="mini-stat__label">Récord</span><strong class="mini-stat__num" id="tBest">—</strong></div>
+            <button class="round-btn" id="tPause" type="button" aria-label="Pausa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg></button>
+          </aside>
+        </div>
+        <div class="torre__pad">
+          <button class="pad-btn" type="button" data-accion="izquierda" aria-label="Mover a la izquierda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button class="pad-btn" type="button" data-accion="abajo" aria-label="Bajar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <button class="pad-btn" type="button" data-accion="derecha" aria-label="Mover a la derecha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          <button class="pad-btn pad-btn--accent" type="button" data-accion="rotar" aria-label="Girar la pieza"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
+          <button class="pad-btn pad-btn--accent" type="button" data-accion="soltar" aria-label="Soltar la pieza de golpe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M5 21h14"/></svg></button>
+        </div>
+        <p class="keys-hint"><kbd>←</kbd><kbd>→</kbd> mover · <kbd>↑</kbd> girar · <kbd>↓</kbd> bajar · <kbd>Espacio</kbd> soltar · <kbd>P</kbd> pausa</p>
+        <p class="touch-hint">Desliza sobre el tablero para mover · toca para girar · desliza rápido hacia abajo para soltar</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lluvia de amor (atrapar) -->
+  <div class="room" id="sala-lluvia" role="dialog" aria-modal="true" aria-labelledby="titulo-lluvia">
+    <header class="room__bar">
+      <button class="room__back" type="button" data-cerrar-sala aria-label="Volver a la sala de juegos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg><span>Juegos</span></button>
+      <h2 class="room__title" id="titulo-lluvia">Lluvia de amor</h2>
+      <span class="room__spacer" aria-hidden="true"></span>
+    </header>
+    <div class="room__body">
+      <div class="lluvia">
+        <div class="hud">
+          <div class="hud__item"><span class="hud__label">Vidas</span><strong class="hud__lives" id="lLives">♥♥♥</strong></div>
+          <div class="hud__item"><span class="hud__label">Puntos</span><strong id="lScore">0</strong></div>
+          <div class="hud__item"><span class="hud__label">Récord</span><strong id="lBest">—</strong></div>
+        </div>
+        <div class="lluvia__stage" id="lStage" tabindex="0" aria-label="Juego Lluvia de amor">
+          <canvas class="lluvia__canvas" id="lCanvas"></canvas>
+          <div class="ov is-shown" id="lOverlay">
+            <div class="ov__panel">
+              <span class="ov__emoji" data-ov="emoji" aria-hidden="true">☁️</span>
+              <p class="ov__title" data-ov="titulo">Lluvia de amor</p>
+              <p class="ov__text" data-ov="texto">Mueve la nubecita y atrapa corazones y a los chicos: su carita vale 5 y la de tu bias, ¡10! Esquiva las nubes de tormenta.</p>
+              <button class="btn btn--glow" type="button" data-ov="boton"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span data-ov="boton-texto">Empezar</span></button>
+            </div>
+          </div>
+        </div>
+        <p class="keys-hint">Mueve el mouse o usa <kbd>←</kbd><kbd>→</kbd> · <kbd>P</kbd> pausa</p>
+        <p class="touch-hint">Arrastra el dedo por la pantalla para mover la nubecita</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ¿Quién es? (adivina el integrante) -->
+  <div class="room" id="sala-quien" role="dialog" aria-modal="true" aria-labelledby="titulo-quien">
+    <header class="room__bar">
+      <button class="room__back" type="button" data-cerrar-sala aria-label="Volver a la sala de juegos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg><span>Juegos</span></button>
+      <h2 class="room__title" id="titulo-quien">¿Quién es?</h2>
+      <span class="room__spacer" aria-hidden="true"></span>
+    </header>
+    <div class="room__body">
+      <div class="quien">
+        <div class="hud">
+          <div class="hud__item"><span class="hud__label">Ronda</span><strong id="qRound">0/10</strong></div>
+          <div class="hud__item"><span class="hud__label">Puntos</span><strong id="qScore">0</strong></div>
+          <div class="hud__item"><span class="hud__label">Récord</span><strong id="qBest">—</strong></div>
+        </div>
+        <div class="quien__stage">
+          <div class="quien__frame" id="qFrame"><img class="quien__img" id="qImg" alt=""></div>
+          <span class="quien__timer" aria-hidden="true"><i id="qTimer"></i></span>
+          <div class="ov is-shown" id="qOverlay">
+            <div class="ov__panel">
+              <span class="ov__emoji" data-ov="emoji" aria-hidden="true">🔍</span>
+              <p class="ov__title" data-ov="titulo">¿Quién es?</p>
+              <p class="ov__text" data-ov="texto">Una carita aparece borrosa y de a poco se ve mejor. ¡Adivina quién es lo más rápido que puedas! Mientras antes respondas, más puntos ganas.</p>
+              <button class="btn btn--glow" type="button" data-ov="boton"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span data-ov="boton-texto">Empezar</span></button>
+            </div>
+          </div>
+        </div>
+        <p class="quien__feedback" id="qFeedback" aria-live="polite">¿Quién se esconde aquí?</p>
+        <div class="quien__options" id="qOptions"></div>
+        <button class="btn btn--glow quien__next" id="qNext" type="button" hidden>Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rompecabezas -->
+  <div class="room" id="sala-puzzle" role="dialog" aria-modal="true" aria-labelledby="titulo-puzzle">
+    <header class="room__bar">
+      <button class="room__back" type="button" data-cerrar-sala aria-label="Volver a la sala de juegos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg><span>Juegos</span></button>
+      <h2 class="room__title" id="titulo-puzzle">Rompecabezas</h2>
+      <span class="room__spacer" aria-hidden="true"></span>
+    </header>
+    <div class="room__body">
+      <div class="puzzle">
+        <div class="puzzle__pick" id="pMembers" role="radiogroup" aria-label="Elige a quién armar"></div>
+        <div class="puzzle__size" role="group" aria-label="Dificultad">
+          <button class="seg is-active" type="button" data-n="3" aria-pressed="true">Fácil · 3×3</button>
+          <button class="seg" type="button" data-n="4" aria-pressed="false">Difícil · 4×4</button>
+        </div>
+        <div class="hud">
+          <div class="hud__item"><span class="hud__label">Movimientos</span><strong id="pMoves">0</strong></div>
+          <div class="hud__item"><span class="hud__label">Tiempo</span><strong id="pTime">00:00</strong></div>
+          <div class="hud__item"><span class="hud__label">Récord</span><strong id="pBest">—</strong></div>
+        </div>
+        <div class="puzzle__board" id="pBoard" tabindex="0" aria-label="Rompecabezas: toca una pieza junto al espacio vacío para moverla">
+          <div class="ov" id="pOverlay">
+            <div class="ov__panel">
+              <span class="ov__emoji" data-ov="emoji" aria-hidden="true">🧩</span>
+              <p class="ov__title" data-ov="titulo">¡Lo armaste!</p>
+              <p class="ov__text" data-ov="texto"></p>
+              <button class="btn btn--glow" type="button" data-ov="boton"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span data-ov="boton-texto">Jugar otra vez</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="puzzle__actions">
+          <button class="btn btn--ghost" id="pShuffle" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Mezclar</button>
+          <button class="btn btn--ghost" id="pPeek" type="button">👀 Ver la foto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
        VENTANA DE VICTORIA DEL JUEGO
        ===================================================== -->
   <div class="win" id="win" role="dialog" aria-modal="true" aria-labelledby="winTitle" aria-hidden="true">
@@ -679,5 +1177,6 @@
 
 
   <script src="script.js" defer></script>
+  <script src="juegos.js" defer></script>
 </body>
 </html>
