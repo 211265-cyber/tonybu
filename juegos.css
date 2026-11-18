@@ -1359,3 +1359,77 @@ html.sala-abierta body {
     justify-content: center;
   }
 }
+
+
+/* ---------------------------------------------------------
+   9. CELULAR: letras más grandes y cómodas de leer
+   (ella usa sobre todo el celular)
+   --------------------------------------------------------- */
+@media (max-width: 600px) {
+  html { font-size: 106.25%; }               /* 17 px en vez de 16 */
+  body { line-height: 1.75; }
+
+  .section { padding-inline: 1.1rem; }
+  .section__text { font-size: 1.04rem; line-height: 1.7; }
+  .eyebrow { font-size: .78rem; letter-spacing: .24em; }
+  .hero__subtitle { font-size: 1.08rem; }
+
+  /* Contadores y etiquetas pequeñitas */
+  .counter__unit,
+  .stat__label,
+  .hud__label,
+  .mini-stat__label { font-size: .66rem; letter-spacing: .07em; }
+  .counter__total { font-size: 1rem; }
+
+  /* Días preciosos */
+  .birth__label { font-size: .7rem; letter-spacing: .2em; }
+  .birth__row span { font-size: .86rem; }
+  .birth__row strong { font-size: 1rem; }
+  .birth__note { font-size: 1.15rem; }
+  .life__detail { font-size: .98rem; }
+  .life__next-title { font-size: 1.2rem; }
+  .life__next-text { font-size: .88rem; }
+  .spark { padding: 1.15rem .6rem 1.05rem; }
+  .spark__num { font-size: 1.35rem; }
+  .spark__text { font-size: .84rem; line-height: 1.45; }
+
+  /* Bangtan */
+  .member__role { font-size: .9rem; }
+  .member__info span { font-size: .8rem; }
+  .member__fact { font-size: .84rem; }
+  .member__bias { font-size: .78rem; }
+  .bias-pill { font-size: .9rem; }
+  .sabias__text { font-size: .98rem; }
+
+  /* Sala de juegos: una tarjeta por fila, grande y clara */
+  .arcade__grid { grid-template-columns: 1fr; gap: 1.1rem; max-width: 420px; }
+  .gart { aspect-ratio: 16 / 9; }
+  .gcard__info { padding: 1rem 1.15rem 1.15rem; }
+  .gcard__tag { font-size: .66rem; }
+  .gcard__title { font-size: 1.4rem; }
+  .gcard__text { font-size: .95rem; }
+  .gcard__best { font-size: .8rem; }
+  .gcard__play { padding: .55rem 1.2rem; font-size: .9rem; }
+
+  /* Dentro de los juegos */
+  .room__title { font-size: 1.25rem; }
+  .room__back { font-size: .92rem; }
+  .room__intro { font-size: .98rem; }
+  .ov__title { font-size: 1.45rem; }
+  .ov__text { font-size: .96rem; }
+  .keys-hint,
+  .touch-hint { font-size: .86rem; }
+  .game__fact-title { font-size: 1.15rem; }
+  .game__fact-text { font-size: .95rem; }
+  .game__mini-label { font-size: .72rem; }
+  .torre__next-name { font-size: .74rem; }
+  .quien__feedback { font-size: 1.1rem; }
+  .qopt { min-height: 60px; font-size: 1.08rem; }
+  .pick { font-size: .74rem; }
+  .seg { font-size: .9rem; }
+
+  .toast { font-size: .95rem; }
+  .letter__body { font-size: 1.05rem; }
+  .timeline__card p { font-size: .98rem; }
+  .track__why { font-size: .9rem; }
+}

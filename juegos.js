@@ -1490,15 +1490,15 @@ SALA.al('memoria', {
     el.tiempo.style.width = '100%';
 
     // Empieza muy de cerca y borrosa
-    const desvioX = azar(-14, 14).toFixed(1);
-    const desvioY = azar(-10, 12).toFixed(1);
-    ponerFoto('none', `scale(3.1) translate(${desvioX}%, ${desvioY}%)`, 'blur(16px) saturate(1.2)');
+    const desvioX = azar(-10, 10).toFixed(1);
+    const desvioY = azar(-8, 9).toFixed(1);
+    ponerFoto('none', `scale(2.3) translate(${desvioX}%, ${desvioY}%)`, 'blur(8px) saturate(1.15)');
     q.estado = 'cargando';
     const turno = ++q.turno;
     const arrancarRonda = () => {
       if (turno !== q.turno || q.estado !== 'cargando') return;
       void el.foto.offsetWidth;
-      ponerFoto(`transform ${DURACION}ms linear, filter ${DURACION}ms linear`, 'scale(1.12) translate(0, 0)', 'blur(1.5px) saturate(1)');
+      ponerFoto(`transform ${DURACION}ms linear, filter ${DURACION}ms linear`, 'scale(1.08) translate(0, 0)', 'blur(0px) saturate(1)');
       void el.tiempo.offsetWidth;
       el.tiempo.style.transition = `width ${DURACION}ms linear`;
       el.tiempo.style.width = '0%';

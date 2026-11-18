@@ -39,7 +39,10 @@ const CONFIG = {
   // Fecha y hora en que empezaron a ser novios.
   // Formato: 'AAAA-MM-DDTHH:MM:SS'
   // Ejemplo: 14 de febrero de 2022 a las 8:30 p.m. → '2022-02-14T20:30:00'
-  fechaInicio: '2022-02-14T20:30:00',
+  fechaInicio: '2025-03-12T00:00:00',
+
+  // Año en que se hizo ARMY
+  armyDesde: 2016,
 
   // Nombre que muestra el tocadiscos cuando suena music/cancion.mp3
   nombreCancionFondo: 'Nuestra canción 💜',
@@ -569,7 +572,7 @@ const dias = {
   segundos: $('#dSegundos'),
   latidos: $('#dLatidos'),
   lunas: $('#dLunas'),
-  vueltas: $('#dVueltas'),
+  army: $('#dArmy'),
   debut: $('#dDebut'),
   juntos: $('#dJuntos'),
   proximoTitulo: $('#dProximoTitulo'),
@@ -621,7 +624,7 @@ function actualizarDias() {
 
   if (dias.total) dias.total.textContent = t.total.toLocaleString('es');
   if (dias.edad) dias.edad.textContent = plural(t.anios, 'año', 'años');
-  if (dias.vueltas) dias.vueltas.textContent = t.anios.toLocaleString('es');
+  if (dias.army) dias.army.textContent = plural(ahora.getFullYear() - CONFIG.armyDesde, 'año', 'años');
   if (dias.detalle) {
     dias.detalle.textContent = `${plural(t.anios, 'año', 'años')}, ${plural(t.meses, 'mes', 'meses')} y ${plural(t.dias, 'día', 'días')}`;
   }
